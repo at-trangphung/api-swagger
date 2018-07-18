@@ -1,0 +1,15 @@
+//= require rails-ujs
+//= require ./js/jquery/jquery-1.10.1.min
+//= require ./js/jquery.cycle2.min
+//= require ./js/jquery.easing.1.3
+//= require ./js/grids
+//= require ./js/owl.carousel.min
+//= require ./js/bootstrap.touchspin
+//= require js/bootstrap.min
+//= require ./js/jquery.parallax-1.1
+//= require ./js/helper-plugins/jquery.mousewheel.min
+//= require ./js/jquery.mCustomScrollbar
+//= require ./js/home
+//= require ./js/script
+//= require ./js/checkout
+//= require cloudinary

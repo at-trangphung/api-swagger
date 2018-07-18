@@ -1,0 +1,23 @@
+<div class="panel panel-default">
+  <div class="panel-heading">
+    <%= "List new order" %>
+  </div>
+  <div class="panel-body">
+    <div class="wishlist-item table-responsive">
+      <table class="table text-center">
+        <thead>
+          <tr>
+            <th class="text-center">id</th>
+            <th class="text-center">email</th>
+            <th class="text-center">customer</th>
+            <th class="text-center">time shpping</th>
+            <th class="text-center">total</th>
+          </tr>
+        </thead>
+        <tbody id="list-order">
+          <%= render partial: "new_transaction"%>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>

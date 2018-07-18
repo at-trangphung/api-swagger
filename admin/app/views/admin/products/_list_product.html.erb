@@ -1,0 +1,30 @@
+<div class="panel panel-default">
+  <div class="panel-heading">
+    <h5>list product</h5>
+  </div>
+  <div class="panel-body">
+    <div class="wishlist-item table-responsive">
+      <table class="table">
+        <thead>
+          <tr>
+            <th>id</th>
+            <th class="th-product">Picture</th>
+            <th>Name</th>
+            <th>Price</th>
+            <th>Category</th>
+            <th >Description</th>
+            <th class="text-center">Discount</th>
+            <th class="text-center">Like</th>
+            <th class="text-center">Size</th>
+            <th class="text-center">Type</th>
+            <th>Function</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% @id = 0 %>
+          <%= render partial: "product", collection: @productList %>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>

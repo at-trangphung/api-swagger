@@ -1,0 +1,119 @@
+.img-circle.profile_img_comment {
+  width: 50px;
+  height: 50px;
+  background: #fff;
+  z-index: 1000;
+  position: inherit;
+  border: 1px solid rgba(52,73,94,.44);
+  padding: 1px;
+  margin: 15px 0px 0px ;
+
+}
+.img-circle.profile_img {
+  width: 150px;
+  height: 150px;
+  background: #fff;
+  margin-left: 10%;
+  z-index: 1000;
+  position: inherit;
+  margin: 20px 10px 10px;
+  border: 1px solid rgba(52,73,94,.44);
+  padding: 2px;
+}
+
+.img-circle {
+  border-radius: 50%;
+}
+img {
+  vertical-align: middle;
+}
+img {
+  border: 0;
+}
+*, :after, :before {
+  box-sizing: border-box;
+}
+.profile_info {
+  padding: 25px 20px 10px;
+  width: 60%;
+  float: left;
+}
+.profile_pic {
+  width: 35%;
+  float: left;
+  margin-left: 10px;
+}
+.profile_info h2 {
+  font-size: 20px;
+  color: #ECF0F1;
+  margin: 0;
+  font-weight: 300;
+  margin-top: 10px;
+}
+.text-reply {
+  font-size: 13px;
+  color: #30B0EB;
+}
+.btn-more {
+    background: #2a2a2a;
+    border-radius: 0;
+    color: #fff;
+    font-size: 13px;
+    letter-spacing: 1px;
+    margin: 0;
+    text-align: center;
+    text-transform: uppercase;
+}
+.btn {
+    border: medium none;
+    border-radius: 3px;
+    font-size: 14px;
+    font-weight: normal;
+    line-height: 1.4;
+    padding: 8px 20px;
+    transition: all 0.25s linear 0s;
+}
+.pb-cmnt-textarea {
+  resize: none;
+  padding: 20px;
+  margin: 5px;
+  height: 50px;
+  width: 80%;
+  border: 1px solid rgba(52,73,94,.44);
+}
+.btn-comment {
+  border-radius: 15%;
+  width: 45px;
+}
+.content-comment {
+  border:1px solid rgba(52,73,94,.44);
+  margin: 0px 0px 10px 0px;
+  padding: 10px;
+  border-radius: 10px;
+  background-color: #E4EDF1;
+  background-attachment: fixed;
+}
+.item-comment {
+  margin-top: 10px;
+}
+.toggle-user li{
+  color: #fff;
+  margin-top: 10px;
+}
+.pointer {
+  cursor: pointer;
+}
+.favorite {
+  height: 30px;
+  line-height: 31px;
+  position: absolute;
+  right: 30px;
+  text-align: center;
+  top: 15px;
+  width: 30px;
+  z-index: 10;
+  width: 50px;
+}
+.suggest-product {
+  width: 100%
+}

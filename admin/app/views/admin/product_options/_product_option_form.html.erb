@@ -1,0 +1,39 @@
+<%= form_with model: @product_option, local: true, class: 'form-horizontal', 
+  html: { role: 'form'} do |f| %>
+
+  <div class="form-group">
+    <%= f.label :product_id, "product" %>
+    <%= f.select("product_id", "product_id",{}, { class:"form-control" }) do  %>
+      <%= @products.each do |product| %> 
+        <option value='<%= product.id %>'.html_safe><%=product.name%></option>
+      <% end %> 
+    <% end %>
+  </div>
+  <div class="form-group">
+    <%= f.label :type_id, "Type" %>
+    <%= f.select("type_id", "type_id",{}, { class:"form-control" }) do  %>
+      <%= @types.each do |type| %> 
+        <option value='<%= type.id %>'.html_safe><%=type.name%></option>
+      <% end %> 
+    <% end %>
+  </div>
+  <div class="form-group">
+    <%= f.label :size_id, "Size" %>
+    <%= f.select("size_id", "size_id",{}, { class:"form-control" }) do  %>
+      <%= @sizes.each do |size| %> 
+        <option value='<%= size.id %>'.html_safe><%=size.name%></option>
+      <% end %> 
+    <% end %>
+  </div>
+  <div class="form-group">
+    <%= f.label :price %>
+    <%= f.number_field :price, class: "form-control", placeholder: "Price", 
+      required: true %>
+  </div>
+  <div class="col-sm-offset-2 col-sm-2">
+    <%= link_to "Cancel" , product_options_path ,class: "btn btn-primary"%>
+  </div>
+  <div class="col-sm-offset-2 col-sm-2">
+    <%= f.submit ("Save"),class: "btn btn-primary" %>
+  </div>
+<% end %>

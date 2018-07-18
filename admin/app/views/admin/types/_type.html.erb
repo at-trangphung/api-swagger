@@ -1,0 +1,19 @@
+<% @types.each_with_index do |type, index| %>
+<tr>
+  <% params[:page] = 1 if params[:page].nil? %>
+
+  <td><%= (params[:page].to_i - 1) * 5 + index.to_i + 1 %></td>
+  <td><%= type.name %></td>
+  <td>
+  <%= link_to type_path(type), 
+    method: :delete,
+    data: {confirm: "Do you want detele this type"} do %>
+    <i class="pe-7s-trash"></i>
+  <% end %>
+  |
+  <%= link_to edit_type_path(type) do %>
+    <i class="pe-7s-pen"></i>
+  <% end %>
+  </td>
+</tr>
+<% end %>

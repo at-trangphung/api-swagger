@@ -1,0 +1,10 @@
+<% @new_transactions.each_with_index do |new_transaction, index| %>
+<tr>
+  <td><%= index.to_i + 1 %></td>
+  <td><%= new_transaction.customer.email %></td>
+  <td><%= new_transaction.customer.first_name %> 
+      <%= new_transaction.customer.last_name %></td>
+  <td><%= l(new_transaction.delivery_time, format: '%B, %d %Y - %H:%M:%S') %></td>
+  <td><%= new_transaction.amount %> $</td>
+</tr>
+<% end %>

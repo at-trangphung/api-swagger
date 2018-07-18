@@ -1,0 +1,44 @@
+<div id="page-wrapper" class="page-wrapper">
+  <div class="row">
+    <div class="col-lg-12">
+      <h1 class="page-header">Manage size</h1>
+    </div>
+  </div>
+  <div class="col-lg-12">
+    <% flash.each do |message_type, message| %>
+      <%= content_tag(:div, message, class: "alert alert-#{message_type}") %>
+    <% end %>
+    <%= yield %>
+  </div>
+  <div class="row">
+    <div class="col-lg-12">
+      <div class="panel-heading">
+        <%= link_to ("add new"), new_size_path, class: "btn btn-primary" %>
+      </div>
+    </div>
+  </div>
+  <div class="panel panel-default">
+    <div class="panel-heading">
+      <h5> List size of product </h5>
+    </div>
+    <div class="panel-body">
+      <div class="table-responsive">
+        <table class="table text-center">
+          <thead>
+            <tr>
+              <th class="text-center">id</th>
+              <th class="text-center">name</th>
+              <th class="text-center">function</th>
+            </tr>
+          </thead>
+          <tbody>
+            <%= render partial: "size" %>
+          </tbody>
+        </table>
+      </div>
+      <div class="col-lg-12 text-center">
+        <%= will_paginate(@sizes, renderer: BootstrapPagination::Rails)%>
+      </div>
+    </div>
+  </div>
+</div>

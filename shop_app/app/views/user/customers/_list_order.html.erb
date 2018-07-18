@@ -1,0 +1,28 @@
+<div class="panel panel-default">
+  <div class="panel-heading">
+    <%= "List order" %>
+  </div>
+  <div class="panel-body">
+    <div class="wishlist-item table-responsive">
+      <table class="table">
+        <thead>
+          <tr>
+            <th>ID</th>
+            <th>First name</th>
+            <th>Last name</th>
+            <th>User email</th>
+            <th>Total</th>
+            <th>Date</th>
+            <th>Status</th>
+          </tr>
+        </thead>
+        <tbody id="list-order">
+          <%= render partial: "order" %>
+        </tbody>
+      </table>
+      <div class="col-lg-12 text-center">
+        <%= will_paginate(@orders, renderer: BootstrapPagination::Rails)%>
+      </div>
+    </div>
+  </div>
+</div>

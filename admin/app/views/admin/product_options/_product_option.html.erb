@@ -1,0 +1,27 @@
+<% @id = @id + 1 %>
+<tr class="text-center">
+  <% if params[:page].nil?%>
+    <% params[:page] = 1 %>
+  <% end %>
+  <td><%= (params[:page].to_i - 1) * 10 + @id %></td>
+  <td><%= product_option.product.name %></td>
+  <td>
+    <%= cl_image_tag(product_option.product.image_link, 
+        width: 70, height: 50) %>
+  </td>
+  <td><%= product_option.type.name %></td>
+  <td><%= product_option.size.name %></td> 
+  <td><%= product_option.price %> $</td> 
+  <td>
+  <%= link_to product_option_path(product_option), 
+    method: :delete,
+    data: {confirm: "Do you want detele this product_option"} do %>
+    <i class="pe-7s-trash"></i>
+  <% end %>
+  |
+  <%= link_to edit_product_option_path(product_option) do %>
+    <i class="pe-7s-pen"></i>
+  <% end %>
+  </td>
+</tr>
+

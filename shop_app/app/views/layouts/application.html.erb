@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title><%= yield :title %></title>
+    <%= csrf_meta_tags %>
+    <link href="<%= image_path("ico/favicon.ico") %>" rel="shortcut icon" />
+
+    <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.13/css/all.css" integrity="sha384-DNOHZ68U8hZfKXOrtjWvjxusGo9WQnrNx2sqG0tfsghAvtVlRW3tvkXWZh58N9jp" crossorigin="anonymous">
+  </head>
+
+  <body>
+  	<%= render 'shared/navbar' %>
+    <div class="container main-container headerOffset">
+
+      <div class="row">
+      
+        <div class="col-lg-3 col-md-3 col-sm-12">
+          <div class="panel-group" id="accordionNo">
+             <%= render 'shared/sidebar'%>
+          </div>
+        </div>
+
+         <div class="col-lg-9 col-md-9 col-sm-12">
+           <% flash.each do |message_type, message| %>
+            <%= content_tag(:div, message, class: "alert alert-#{message_type}") %>
+           <% end %>
+          <%= yield %>
+         </div>
+
+      </div> 
+
+    </div>
+    <%= render 'shared/footer' %>
+    
+	  <%= yield :script %>
+  </body>
+</html>

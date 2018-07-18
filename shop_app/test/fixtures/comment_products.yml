@@ -1,0 +1,17 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  user_id: 1
+  product_id: 1
+  content: MyText
+  date_created: 2018-06-19 22:11:20
+  product: one
+  user: one
+
+two:
+  user_id: 1
+  product_id: 1
+  content: MyText
+  date_created: 2018-06-19 22:11:20
+  product: two
+  user: two

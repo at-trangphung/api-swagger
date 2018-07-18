@@ -1,0 +1,20 @@
+<% @id = @id+1 %>
+<tr>
+  <% if params[:page].nil?%>
+    <% params[:page] = 1 %>
+  <% end %>
+  <td><%= (params[:page].to_i - 1) * 5 + @id %></td>
+  <td><%= category.name %></td>
+  <td><%= category.parent_id %></td>
+  <td>
+    <%= link_to category_path(category), 
+      method: :delete,
+      data: {confirm: "Do you want detele this category"} do %>
+      <i class="pe-7s-trash"></i>
+    <% end %>
+    |
+    <%= link_to edit_category_path(category) do %>
+      <i class="pe-7s-pen"></i>
+    <% end %>
+  </td>
+</tr>

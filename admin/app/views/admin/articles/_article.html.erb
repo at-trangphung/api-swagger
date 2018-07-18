@@ -1,0 +1,23 @@
+<% @id = @id+1 %>
+<tr>
+  <% if params[:page].nil?%>
+    <% params[:page] = 1 %>
+  <% end %>
+  <td><%= (params[:page].to_i - 1) * 2 + @id %></td>
+  <td><%= article.title %></td>
+  <td>
+    <%= cl_image_tag(article.image_link, :width => 150, :height => 100) %>
+  </td>
+  <td><%= article.content %></td>
+  <td>
+    <%= link_to article_path(article), 
+      method: :delete,
+      data: {confirm: "Do you want detele this article"} do %>
+      <i class="pe-7s-trash"></i>
+    <% end %>
+    |
+    <%= link_to edit_article_path(article) do %>
+      <i class="pe-7s-pen"></i>
+    <% end %>
+  </td>
+</tr>

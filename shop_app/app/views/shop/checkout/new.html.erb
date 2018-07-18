@@ -1,0 +1,64 @@
+<% content_for :title, 'Checkout' %>
+<% content_for :script, javascript_include_tag(:shop) %>
+
+<div class="container main-container headerOffset-checkout">
+  <div class="row">
+    <div class="breadcrumbDiv col-lg-12">
+      <ul class="breadcrumb">
+        <li><%= link_to 'Home', root_path %></li>
+        <li><%= link_to 'Cart', carts_path %></li>
+        <li class="active"> Checkout</li>
+      </ul>
+    </div>
+  </div>
+  <!--/.row-->
+
+  <div class="row">
+    <div class="col-lg-9 col-md-9 col-sm-7 col-xs-6 col-xxs-12 text-center-xs">
+      <h1 class="section-title-inner"><span><i class="fas fa-shopping-cart"></i> Checkout</span></h1>
+    </div>
+    <div class="col-lg-3 col-md-3 col-sm-5 rightSidebar col-xs-6 col-xxs-12 text-center-xs">
+      <h4 class="caps"><%= link_to root_path do %>
+          <i class="fa fa-chevron-left"></i> Back to shopping
+        <% end %>
+      </h4>
+    </div>
+  </div>
+  <!--/.row-->
+
+  <div class="row">
+    <div class="col-lg-9 col-md-9 col-sm-12">
+      <div class="row userInfo">
+        <div class="col-xs-12 col-sm-12">
+          <div class="w100 clearfix">
+            <ul class="orderStep orderStepLook2 order-pointer">
+              <li class="active" id="order-step-1">
+                <a><i class="fa fa-map-marker"> </i><span> address </span></a>
+              </li>
+              <li id="order-step-2">
+                <a><i class="fa fa fa-envelope"></i><span> Billing </span></a>
+              </li>
+              <li id="order-step-3">
+                <a><i class="fa fa-truck"></i><span> Shipping </span></a>
+              </li>
+              <li id="order-step-4">
+                <a><i class="fa fa-money"> </i><span> Payment </span></a>
+              </li>
+              <li id="order-step-5">
+                <a><i class="fa fa-check-square "> </i><span> Order </span></a>
+              </li>
+            </ul>
+            <!--/.orderStep end-->
+          </div>
+            <!-- checkout-main -->
+          <%= render 'checkout' %>
+        </div>
+      </div>
+        <!--/row end-->
+    </div>
+
+    <%= render 'shared/right_sidebar' %>
+
+  </div>
+  <!--/row-->
+</div>

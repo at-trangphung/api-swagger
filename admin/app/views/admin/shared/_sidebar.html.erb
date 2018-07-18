@@ -1,0 +1,94 @@
+<div class="sidebar" data-color="#FFFF1D" data-image="http://eaglespeak.com/wp-content/uploads/2016/08/coffee-beans-1-e1471031754821.jpg">
+  <div class="sidebar-wrapper">
+    <div class="profile clearfix">
+      <div class="profile_pic">
+        <%= image_tag("#{image_path 'admin/images/sidebar.jpg'}", :alt => 'TSHOP', class: "img-circle profile_img") %>
+      </div>
+      <div class="profile_info">
+        <span>Welcome!</span>
+        <% if @service_user.current_user %>
+          <h2><%= @service_user.current_user.first_name %> <%= @service_user.current_user.last_name %></h2>
+        <% end %>
+      </div>
+    </div>
+    <% if @service_user.current_user.role_id == 'admin' %>
+      <ul class="nav">
+        <li>
+          <%= link_to(dashboard_index_path) do %>
+            <i class="pe-7s-graph"></i>
+            <p>Dashboard</p>
+          <% end %>
+        </li>
+         <li>
+          <%= link_to(categories_path) do %>
+             <i class="pe-7s-news-paper"></i>
+            <p>Category management</p>
+          <% end %>
+        </li>
+        <li>
+          <%= link_to(sizes_path) do %>
+            <i class="pe-7s-note"></i>
+            <p>Size managment</p>
+          <% end %>
+        </li>
+        <li>
+          <%= link_to(types_path) do %>
+            <i class="pe-7s-notebook"></i>
+            <p>Type managment</p>
+          <% end %>
+        </li>
+        <li>
+          <%= link_to(product_options_path) do %>
+            <i class="pe-7s-folder"></i>
+            <p>Product option managment</p>
+          <% end %>
+        </li>
+        <li>
+          <%= link_to(users_path) do %>
+            <i class="pe-7s-users"></i>
+            <p>User Mangagement</p>
+          <% end %>
+        </li>
+        <li>
+          <%= link_to(products_path) do %>
+             <i class="pe-7s-news-paper"></i>
+            <p>Product management</p>
+          <% end %>
+        </li>
+        <li>
+          <%= link_to(orders_path) do %>
+            <i class="pe-7s-cart"></i>
+            <p>Order management</p>
+          <% end %>
+        </li>
+        <li>
+          <%= link_to(comments_path) do %>
+            <i class="pe-7s-pen"></i>
+            <p>Comment management</p>
+          <% end %>
+        </li>
+        <li>
+          <%= link_to(articles_path) do %>
+            <i class="pe-7s-bell"></i>
+            <p>articles management</p>
+          <% end %>
+        </li>
+      </ul>
+    <% else %>
+      <ul class="nav">
+        <li>
+          <%= link_to(comments_path) do %>
+            <i class="pe-7s-pen"></i>
+            <p>Comment management</p>
+          <% end %>
+        </li>
+        <li>
+          <%= link_to(articles_path) do %>
+            <i class="pe-7s-bell"></i>
+            <p>articles management</p>
+          <% end %>
+        </li>
+      </ul>
+    <% end %>
+  </div>
+</div>

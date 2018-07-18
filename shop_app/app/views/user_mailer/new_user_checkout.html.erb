@@ -1,0 +1,14 @@
+<% content_for :title, 'Create new user' %>
+<h1>Caferia Coffee</h1>
+<p>Hi <%= @user.email %>,</p>
+<!-- <p>
+  <%= @greeting %>, find me in app/views/user_mailer/account_activation.html.erb
+</p> -->
+<h1>Cateria Coffee</h1>
+
+<p>
+Welcome to the Cateria Coffee! Click on the link below to activate your account:
+</p>
+
+<%= link_to "Activate", edit_account_activation_url(@user.activation_token,
+                                                    email: @user.email, id: @user.id) %>

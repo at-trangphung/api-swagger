@@ -1,0 +1,207 @@
+<div class="navbar navbar-tshop navbar-fixed-top megamenu" role="navigation">
+  <div class="navbar-top">
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-6 col-sm-6 col-xs-6 col-md-6">
+          <div class="pull-left ">
+            <ul class="userMenu ">
+              <li>
+                <a href="#"> 
+                  <span class="hidden-xs">HELP</span>
+                  <i class="glyphicon glyphicon-info-sign hide visible-xs "></i>
+                </a>
+              </li>
+              <li class="phone-number">
+                <a href="callto:+12025550151"> 
+                  <span> <i class="fas fa-phone-volume"></i>
+                  </span> 
+                  <span class="hidden-xs" style="margin-left:5px"> +1-202-555-0151
+                  </span>
+                </a>
+              </li>
+            </ul>
+          </div>
+        </div>
+        <div class="col-lg-6 col-sm-6 col-xs-6 col-md-6 no-margin no-padding">
+          <div class="pull-right">
+            <ul class="userMenu pointer">
+             <% if @service_user.current_user %>
+             <div class="toggle-user">
+              <li class="dropdown-toggle" data-toggle="dropdown">
+                <%= @service_user.current_user.email %>
+                <span class="caret"></span>
+              </li>
+              <ul class="dropdown-menu">
+                <li> 
+                  <%= link_to "Profile", 
+                  user_path(@service_user.current_user), 
+                  class: "dropdown-item" %>
+                </li>
+                <li>
+                  <%= link_to "History order", customers_path, 
+                   class: "dropdown-item" %>
+                </li>
+                <li>
+                  <%= link_to "My comment", my_comments_path, 
+                   class: "dropdown-item" %>
+                </li>
+                <li class="hidden-xs"><%= link_to "Logout", '/logout' %></li>
+              </ul>
+              </div>
+              <% else %>  
+              <li class="hidden-xs"><%= link_to 'Sign In', login_path %>
+              </li>
+              <li class="hidden-xs"><%= link_to 'Create Account', sign_up_path %>
+              </li>
+              <% end %>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!--/.navbar-top-->
+
+  <div class="container">
+    <div class="navbar-header">
+      
+        <%= link_to 'Cafeteria Coffee', root_path, class: 'navbar-brand' %>
+
+        <!-- this part for mobile -->
+        <div class="search-box pull-right hidden-lg hidden-md hidden-sm">
+          <div class="input-group">
+            <%= button_tag :class => 'btn btn-nobg getFullSearch', :type => 'submit' do %>
+            <i class="fa fa-search"></i>
+            <% end %>
+          </div>
+
+        </div>
+    </div>
+
+      <div class="navbar-collapse collapse">
+        <ul class="nav navbar-nav" >
+          <li class="nav-item active" ><%= link_to 'Home', root_path %></li>
+        </ul>
+        
+        <ul class="nav navbar-nav" >
+          <li class="nav-item"><%= link_to 'Acticle', articles_path %></li>
+        </ul>
+
+        <div class="nav navbar-nav navbar-right hidden-xs">
+          <div class="dropdown  cartMenu ">
+            <%= link_to carts_path, class: 'dropdown-toggle' do %>
+            <i class="fa fa-shopping-cart"></i> 
+            <span class="cartRespons">
+              <% count_products = 0 %>
+              <% @order_items.each do |item| %>
+              <% count_products += item["quantity"]%>
+
+              <% end %>
+              <b>(<%= count_products %>)</b>
+            </span>
+            <b class="caret"> </b>
+            <% end %>
+            <div class="dropdown-menu col-lg-4 col-xs-12 col-md-4 ">
+              <div class="w100 miniCartTable scroll-pane mCustomScrollbar _mCS_2" 
+              style="overflow: hidden;">
+              <div class="mCustomScrollBox mCS-dark-2" id="mCSB_2" 
+              style="position: relative; height: 100%; overflow: hidden; max-width: 100%; max-height: 300px;"><div class="mCSB_container mCS_no_scrollbar" style="position:relative; top:0;">
+              <table>
+                <tbody>
+                  <% if @order_items %>
+                    <% @order_items.each do |item| %>
+                    <tr class="miniCartProduct">
+                      <td style="width:20%" class="miniCartProductThumb">
+                        <div>
+                          <%= link_to item.product do %>
+                            <%= cl_image_tag item.product.image_link %>
+                          <% end %>
+                        </div>
+                      </td>
+                      <td style="width:30%">
+                        <div class="miniCartDescription">
+                          <h4>
+                            <%= link_to item.product do %>
+                            <%= item.product.name %>
+                            <% end %>
+                          </h4>
+                          <div class="price">
+                            <span>
+                              <%= item.price %>$
+                            </span>
+                          </div>
+                        </div>
+                      </td>
+                      <td style="width:10%" class="miniCartQuantity">
+                         <%= item.size %>
+                      </td>
+                      <td style="width:10%" class="miniCartQuantity">
+                        X <%= item.quantity %>
+                      </td>
+                      <td style="width:15%" class="miniCartSubtotal">
+                        <span>
+                          <%= item.price.to_f * item.quantity.to_f %>$
+                        </span>
+                      </td>
+                      <td style="width:5%" class="delete">
+                        <%= link_to cart_path(id: item.product_id, size: item.size),
+                        method: :delete,
+                        data: {confirm: "Do you want delete" } do %>
+                        <span>x</span>
+                        <% end %>
+                      </td>
+                    </tr>
+                    <% end %> 
+                  <% end %> 
+                </tbody>
+              </table>
+            </div><div class="mCSB_scrollTools" style="position: absolute; display: none;"><div class="mCSB_draggerContainer"><div class="mCSB_dragger" style="position: absolute; top: 0px; height: 194px;" oncontextmenu="return false;"><div class="mCSB_dragger_bar" style="position: relative; line-height: 194px;"></div></div><div class="mCSB_draggerRail"></div></div></div></div></div>
+            <!--/.miniCartTable-->
+
+            <div class="miniCartFooter text-right">
+              <h3 class="text-right subtotal"> </h3>
+              <%= link_to carts_path, class: 'btn btn-sm btn-danger' do %> 
+              <i class="fa fa-shopping-cart"></i>
+              <span>VIEWCART</span>
+              <% end %>
+              <% if @order_items.blank? %>
+                <%= link_to 'CHECKOUT', new_checkout_path, class: 'btn btn-sm btn-primary order-pointer' %>
+              <% else %>
+                <%= link_to 'CHECKOUT', new_checkout_path, class: 'btn btn-sm btn-primary' %>
+              <% end %>
+                </div>
+              </div>
+            </div>
+            <!--/.cartMenu-->
+
+            <div class="search-box">
+              <div class="input-group">
+                <%= button_tag :class => 'btn btn-nobg getFullSearch', :type => 'button' do %>
+                <i class="fa fa-search"></i>
+                <% end %>
+              </div>
+              <!-- /input-group -->
+            </div>
+
+            <!--/.search-box -->
+          </div>
+
+        </div>
+        <!--/.nav-collapse -->
+      </div>
+      <!--/.container -->
+
+      <div class="search-full text-right"><a class="pull-right search-close"> <i class=" fa fa-times-circle"> </i> </a>
+
+        <div class="searchInputBox pull-right">
+
+          <%= form_tag('/search', method: 'get') do %>
+            <%= text_field_tag :search, nil, class: 'search-input', type: 'search', placeholder: 'start typing and hit enter to search' %>
+            <%= button_tag :class => 'btn-nobg search-btn', :type => 'submit' do %>
+            <i class="fa fa-search"></i> Search
+            <% end %>
+          <% end %>
+        </div>
+      </div>
+  
+</div>

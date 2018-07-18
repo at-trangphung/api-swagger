@@ -1,0 +1,109 @@
+<% content_for :title, 'Profile' %>
+<link href="//netdna.bootstrapcdn.com/bootstrap/3.1.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+<script src="//netdna.bootstrapcdn.com/bootstrap/3.1.0/js/bootstrap.min.js"></script>
+<script src="/code.jquery.com/jquery-1.11.1.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+</head>
+<% if @service_user.current_user %>
+  <%= form_with model: @user, :html => {:class => 'regForm', novalidate: 'novalidate'}, local: true do |form| %>
+    <div class="" style="padding-bottom: 10px;">
+      <legend>Profile Customer</legend>
+      <div class="panel-body">
+        <div class="row">
+          <div class="col-md-3 col-lg-3 mx-3 " align="center">
+            <% if @service_user.current_user[:avatar] %>
+              <%= cl_image_tag @user["avatar"], 
+                  class: "img-circle profile_img" %> 
+            <% else %>  
+              <%= image_tag("default-avatar.png", class: "img-circle profile_img") %>  
+            <% end %>
+           
+          </div>
+          <div class=" col-md-9 col-lg-9 "> 
+            <table class="table">
+              <tbody>
+                <tr>
+                  <td>First name:</td>
+                  <td><%= @service_user.current_user.first_name %></td>
+                </tr>
+                <tr>
+                  <td>Last name:</td>
+                  <td><%= @service_user.current_user.last_name %></td>
+                </tr>
+                <tr>
+                  <td>Email:</td>
+                  <td><%= @service_user.current_user.email %></td>
+                </tr>
+                <tr>
+                  <td>Address:</td>
+                  <td><%= @service_user.current_user.address %></td>
+                </tr>
+                <tr>
+                  <td>Phone:</td>
+                  <td><%= @service_user.current_user.phone %></td>
+                </tr>
+                <tr>
+                  <td>Company:</td>
+                  <td><%= @service_user.current_user.company %></td>
+                </tr>
+                <tr>
+                  <td>Address deliver:</td>
+                  <td><%= @service_user.current_user.address_deliver %></td>
+                </tr>
+            </tbody>
+          </table>
+        </div>
+        </div>
+      </div>
+         
+      <div class="row">
+        <div class=" col-sm-2 control-label pull-right">
+          <%= link_to  "/users/#{@service_user.current_user.id}/edit" do %>
+            <i class="glyphicon glyphicon-edit btn btn-primary"> Edit
+            </i>
+          <% end %>
+        </div>
+        <div class="col-sm-offset-1 col-sm-8 control-label">
+          <button type="button" class="btn btn-primary" data-toggle="collapse" data-target="#demo">
+            <i class="glyphicon glyphicon-cog">        
+            </i> Change password
+          </button>
+          <div id="demo" class="collapse">
+     
+            <div class="form-group">
+              <label class="col-sm-4 control-label">New password: </label>
+              <div class="col-sm-8">
+                <%= form.password_field :password, class: 'form-control', placeholder: 'Enter new password', required: true  %>
+                <%= msg_form_errors @user, :password %>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label class="col-sm-4 control-label">Confirm new password: 
+              </label>
+              <div class="col-sm-8">
+                <%= form.password_field  :password_confirmation, 
+                  class: 'form-control', 
+                  placeholder: 'Enter new confirm password', required: true %>
+                <%= msg_form_errors @user, :password_confirmation %>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <div class="col-sm-offset-4 col-sm-2">
+                <%= link_to "Cancel" , user_path(@service_user.current_user) ,class: "btn btn-primary"%>
+              </div> 
+              <div class="col-sm-2">
+                              
+                  <%= form.submit "Change", class: "btn btn-primary" %>
+              </div>   
+            </div>
+
+          </div>
+        </div>
+      </div>
+    </div>
+
+  <% end %>
+<% end %>

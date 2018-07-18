@@ -1,0 +1,23 @@
+<div class="panel panel-default">
+  <div class="panel-heading">
+  <h3>List order detail</h3>    
+  </div>
+  <div class="panel-body">
+    <div class="wishlist-item table-responsive">
+      <table class="table">
+        <thead>
+          <tr>
+            <th>Image</th>
+            <th>Name</th>
+            <th>Quantity</th>
+            <th>Size</th>
+            <th>Price</th>
+          </tr>
+        </thead>
+        <tbody id="list-order-detail">
+          <%= render partial: "order_detail", collection: @order_details %>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>

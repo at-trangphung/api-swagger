@@ -1,0 +1,122 @@
+<% content_for :title, 'Cart' %>
+<% content_for :script, javascript_include_tag(:shop) %>
+
+<div class="container main-container">
+  <div class="row">
+    <div class="col-lg-9 col-md-9 col-sm-7 col-xs-6 col-xxs-12 text-center-xs">
+      <h1 class="section-title-inner"><span><i
+        class="fa fa-shopping-cart"></i> Shopping cart </span></h1>
+    </div>
+    <div class="col-lg-3 col-md-3 col-sm-5 rightSidebar col-xs-6 col-xxs-12 text-center-xs">
+      <h4 class="caps">
+        <%= link_to root_path do %>
+        <i class="fa fa-chevron-left"> </i> BACK TO SHOPPING
+        <% end %> 
+      </h4>
+    </div>
+  </div>
+    
+  <div class="col-lg-9 col-md-9 col-sm-7">
+    <div class="row userInfo">
+      <div class="col-xs-12 col-sm-12">
+        <div class="cartContent w100">
+          <table class="cartTable table-responsive" style="width:100%">
+            <tbody>
+              <tr class="CartProduct cartTableHeader">
+                <td style="width:15%"> Product</td>
+                <td style="width:20%">Details</td>
+                <td style="width:10%" class="delete">&nbsp;</td>
+                <td style="width:10%">Size</td>
+                <td style="width:20%">Quantity</td>
+                <td style="width:15%">Total</td>
+              </tr>
+              <% @order_items.each do |order_detail| %>
+                <tr class="CartProduct">
+                  <td class="CartProductThumb">
+                    <div>
+                        <%= link_to order_detail.product do %>
+                          <%= cl_image_tag order_detail.product.image_link %>
+                        <% end %>
+                      </a>
+                    </div>
+                  </td>
+                  <td>
+                    <div class="CartDescription">
+                      <h4>
+                        <%= link_to order_detail.product do %>
+                          <%= order_detail.product.name %>
+                        <% end %>
+                      </a></h4>
+                      <div class="price">
+                        <span>
+                          <%= order_detail.price %>$
+                        </span>
+                      </div>
+                    </div>
+                  </td>
+                  <td class="delete">
+                    <%= link_to cart_path(id: order_detail.product_id, size: order_detail.size),
+                        method: :delete,
+                        data: {confirm: "Do you want delete" } do %>
+                      <%= content_tag :i, "", class: "fa fa-trash fa-2x" %>
+                    <% end %>
+                  </td>
+                  <td>
+                    <%= order_detail.size %>
+                  </td>
+                  <td>
+                    <%= form_with scope: :cart, url: cart_path(id: order_detail.product_id), method: :put, local: true do |form| %>
+                      <%= form.button value: "-", class: "btn btn-sm btn-primary",
+                      style: "margin: 14px -3px 15px -3px; padding: 5px 10px" do %>
+                       <%= content_tag :span, " - " %>
+                      <% end %>
+
+                      <%= form.hidden_field :size, value: order_detail.size %>
+                      <%= label_tag "#{order_detail.quantity}", nil,  class: "btn"%>
+                      <%= form.button value: "+", class: "btn btn-sm btn-primary",
+                      style: "margin: 14px -3px 15px -3px; padding: 5px 10px" do %>
+                        <%= content_tag :span, " + " %>
+                      <% end %>
+                    <% end %>
+                  </td>
+                  <td class="price"><%= order_detail.quantity.to_f * order_detail.price.to_f %>$</td>
+                </tr>
+              <% end %>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="cartFooter w100">
+            <div class="box-footer">
+              <div class="pull-left">
+                <%= link_to root_path, class: "btn btn-primary btn-lg btn-block" do%>
+                  <i class="fa fa-arrow-left"> </i>&nbsp; Continue shopping
+                <% end %>
+              </div>
+              <div class="pull-right">
+                <% if session[:shopping_cart].blank? %>
+                  <a class="btn btn-lg btn-block btn-primary btn-lg disabled "
+                  title="checkout"
+                  style="margin-bottom:20px"> 
+                  Proceed to checkout &nbsp; 
+                  <i class="fa fa-arrow-right"></i> 
+                </a>
+                <% else %>  
+                  <%= link_to new_checkout_path, class: "btn btn-primary btn-lg btn-block" ,
+                  id: "order-detail-content" do %>
+                    <span>Proceed to checkout &nbsp; </span>
+                    <i class="fa fa-arrow-right"> </i>
+                  <% end %>
+                <% end %>
+              </div>
+            </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  <%= render 'shared/right_sidebar' %>
+
+  <div style="clear:both">
+  </div>
+</div>

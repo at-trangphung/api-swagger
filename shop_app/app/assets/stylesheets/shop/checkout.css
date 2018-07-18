@@ -1,0 +1,46 @@
+#step-2, #step-3, #step-4, #step-5, #payment-option-2, #payment-option-3{
+  display: none;
+}
+
+.order-pointer {
+  pointer-events: none;
+  cursor: default;
+}
+
+.checkbox-order {
+	padding-left: 20px;
+}
+
+.btn-fs {
+	font-size: 30px;
+}
+
+input[type=number]::-webkit-inner-spin-button, 
+input[type=number]::-webkit-outer-spin-button {
+  -webkit-appearance: none; 
+  margin: 0; 
+}
+
+.mr-bot {
+	margin-bottom: 30px;
+}
+
+.mystyle {
+	color: #f33131;
+}
+
+.mr-top {
+	margin-top: 40px;
+}
+
+.mr-left {
+	margin-left: 20px;
+}
+
+.cate-f-20 {
+	font-size: 20px !important ;
+}
+
+.cate-f-15 {
+	font-size: 15px !important ;
+}

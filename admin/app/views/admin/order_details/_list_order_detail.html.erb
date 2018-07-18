@@ -1,0 +1,28 @@
+<div class="panel panel-default">
+  <div class="panel-heading">
+    <h4>list_order_detail</h4>
+  </div>
+  <div class="panel-body">
+    <div class="wishlist-item table-responsive">
+      <table class="table text-center">
+        <thead>
+          <tr>
+            <th class="text-center">id</th>
+            <th class="text-center">name</th>
+            <th class="text-center">image</th>
+            <th class="text-center">price</th>
+            <th class="text-center">size</th>
+            <th class="text-center">quantity</th>
+            <th class="text-center">total</th>
+          </tr>
+        </thead>
+        <tbody id="list-order-detail">
+          <%= render partial: "order_detail" %>
+        </tbody>
+      </table>
+      <div class="col-lg-12 text-center">
+        <%= will_paginate(@order_details, renderer: BootstrapPagination::Rails)%>
+      </div>
+    </div>
+  </div>
+</div>

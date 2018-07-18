@@ -1,0 +1,39 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+
+  <title>Admin</title>
+
+  <meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0' name='viewport' />
+  <meta name="viewport" content="width=device-width" />
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.13/css/all.css" integrity="sha384-DNOHZ68U8hZfKXOrtjWvjxusGo9WQnrNx2sqG0tfsghAvtVlRW3tvkXWZh58N9jp" crossorigin="anonymous">
+
+  <%= csrf_meta_tags %>
+  <%= stylesheet_link_tag 'admin', media: 'all' %>
+  <%= yield(:css) %>
+
+</head>
+<body>
+
+  <div class="wrapper">
+    
+    <%= render partial: 'admin/shared/sidebar' %>
+
+    <div class="main-panel">
+      <%= render partial: 'admin/shared/nav' %>
+    <div class="content">
+    <%= yield%>
+    </div>
+    <footer class="footer">
+      <%= render partial: 'admin/shared/footer' %>
+    </footer> 
+    </div>
+  </div>
+  <%= javascript_include_tag 'admin' %>
+  <%= yield(:js) %>
+  <%= yield(:script) %>
+
+</body>
+</html>

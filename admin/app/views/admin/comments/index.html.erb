@@ -1,0 +1,21 @@
+<div id="page-wrapper" class="page-wrapper">
+  <div class="row">
+    <div class="col-lg-12">
+      <h1 class="page-header">Manage comment article</h1>
+    </div>
+  </div>
+  <div class="col-lg-12">
+    <% flash.each do |message_type, message| %>
+      <%= content_tag(:div, message, class: "alert alert-#{message_type}") %>
+    <% end %>
+    <%= yield %>
+  </div>
+  <div class="row">
+    <div class="col-lg-12" id="list-order">
+    <%= render "list_comment" %>
+    </div>
+    <div class="col-lg-12 text-center">
+      <%= will_paginate(@comments, renderer: BootstrapPagination::Rails)%>
+    </div>
+  </div>
+</div>

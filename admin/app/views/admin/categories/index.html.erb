@@ -1,0 +1,68 @@
+<div id="page-wrapper" class="page-wrapper">
+  <div class="row">
+    <div class="col-lg-12">
+      <h1 class="page-header">Manage Categories</h1>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-lg-12">
+      <div class="panel-heading">
+        <%= link_to ("add new"), new_category_path, class: "btn btn-primary" %>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-lg-12">
+      <% flash.each do |message_type, message| %>
+        <%= content_tag(:div, message, class: "alert alert-#{message_type}") %>
+      <% end %>
+      <%= yield %>
+    </div>
+  </div>
+  <%= form_tag categories_path(), method: :get do %>
+    <div class="row" style="margin-bottom: 20px;">
+      <div class=" col-sm-offset-4 col-lg-4" 
+        style="padding-right: 0;"">
+        <%= text_field_tag :search, params[:search], class: "form-control sinput",
+        style: "margin-top:0", placeholder: "name category" %>
+      </div>
+      <div class="col-lg-4"  style="padding-left: 0">
+        <%= button_tag type: "submit", class: "btn btn-default" do %>
+          <%= content_tag :i, "", class: "fa fa-search" %>
+        <% end %>
+      </div>  
+    </div>
+  <% end %>
+  
+  <div class="row">
+    <div class="col-lg-12">
+      <div class="panel panel-default">
+        <div class="panel-heading">
+          <h5> List category </h5>
+        </div>
+        <div class="panel-body">
+          <div class="table-responsive text-center">
+            <table class="table">
+              <thead>
+                <tr>
+                  <th class="text-center">ID</th>
+                  <th class="text-center">NAME</th>
+                  <th class="text-center">PARENT_ID</th>
+                  <th class="text-center">FUNCTION</th>
+                </tr>
+              </thead>
+              <tbody id="list-category">
+                <% @id = 0 %> 
+                <%= render partial: "category", collection: @categories,
+                  local: @id %>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+      <div class="col-lg-12 text-center">
+        <%= will_paginate(@categories, renderer: BootstrapPagination::Rails)%>
+      </div>
+    </div>
+  </div>
+</div>

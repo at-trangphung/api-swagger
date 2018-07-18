@@ -1,0 +1,33 @@
+<% content_for :title, 'Reset Password' %>
+<div class="row">
+  <div class="col-lg-9 col-md-9 col-sm-7">
+    <h1 class="section-title-inner"><span> <i class="fa fa-unlock-alt"> </i> Forgot your password? </span></h1>
+
+    <div class="row userInfo">
+      <div class="col-xs-12 col-sm-12">
+        <p> To reset your password, enter the email address you use to sign in to site. We will then send
+            you a new password. </p>
+
+        <%= form_for(:password_reset, url: password_resets_path, 
+          :html => {role: 'form'}, local: true) do |form| %>
+
+          <div class="form-group">
+            <%= form.label :email, 'Email address', for: 'exampleInputEmail1' %>
+            <%= form.text_field :email, :class => 'form-control', :placeholder => 'Email address', :type => 'email' %>    
+          </div>
+          <%= button_tag :class => 'btn btn-primary', :type => 'submit' do %>
+            <i class="fa fa-unlock"></i> Retrieve Password
+          <% end %>
+        <% end %>
+        <div class="clear clearfix">
+          <ul class="pager">
+              <li class="previous pull-right"><%= link_to '← Back to Login', login_path %></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+      <!--/row end-->
+
+  </div>
+  <div class="col-lg-3 col-md-3 col-sm-5"></div>
+</div>  

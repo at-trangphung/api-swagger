@@ -1,0 +1,26 @@
+<div class="panel panel-default">
+  <div class="panel-heading">
+    <%= "List comments" %>
+  </div>
+  <div class="panel-body">
+    <div class="wishlist-item table-responsive">
+      <table class="table text-center">
+        <thead>
+          <tr>
+            <th class="text-center">id</th>
+            <th class="text-center">first name</th>
+            <th class="text-center">last name</th>
+            <th class="text-center">article</th>
+            <th class="text-center">content</th>
+            <th class="text-center">day create</th>
+            <th class="text-center">status</th>
+            <th class="text-center">function</th>
+          </tr>
+        </thead>
+        <tbody>
+          <%= render partial: "comment" %>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>

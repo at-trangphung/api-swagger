@@ -1,0 +1,2 @@
+module ThanksForOrderHelper
+end

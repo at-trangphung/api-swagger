@@ -1,0 +1,14 @@
+<% @order_details.each_with_index do |order_detail, index| %>
+<tr>
+  <% params[:page] = 1 if params[:page].nil? %>
+
+  <td><%= (params[:page].to_i - 1) * 5 + index.to_i + 1 %></td>
+  <td><%= order_detail.product.name %></td>
+  <td><%= cl_image_tag(order_detail.product.image_link,
+  	 width: 50, height: 50) %></td>
+  <td><%= order_detail.price %>$</td>
+  <td><%= order_detail.size %></td>
+  <td><%= order_detail.quantity %></td>
+  <td><%= order_detail.total_payment %>$</td>
+</tr>
+<% end %>

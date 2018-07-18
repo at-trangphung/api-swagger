@@ -1,0 +1,67 @@
+<% content_for :title, 'Sign up' %>
+<%= form_with model: @users, :html => {:class => 'regForm', novalidate: 'novalidate'}, local: true do |form| %>
+  <div class="col-xs-12 col-sm-6 mr-bot">
+    <h2 class="block-title-2"> Create an account </h2>
+
+    <div class="form-group">
+      <%= form.label :first_name %>
+      <%= form.text_field :first_name, :class => 'form-control', required: true, placeholder: 'Enter first name', type: 'text' %>
+      <%= msg_form_errors @user, :first_name %>
+    </div>
+
+    <div class="form-group">
+      <%= form.label :last_name %>
+      <%= form.text_field :last_name, :class => 'form-control', placeholder: 'Enter first name', type: 'text' %>
+      <%= msg_form_errors @user, :last_name %>
+    </div>
+
+    <div class="form-group">
+      <%= form.label :email, 'Email address' %>
+      <%= form.email_field :email, :class => 'form-control', placeholder: 'Email address', 
+      type: 'email' %>
+      <%= msg_form_errors @user, :email %>
+    </div>
+
+    <div class="form-group">
+      <%= form.label :password %>
+      <%= form.password_field :password, :class => 'form-control', :placeholder => 'Password' %>
+      <%= msg_form_errors @user, :password %>
+    </div>
+
+    <div class="form-group">
+      <%= form.label :password_confirmation %>
+      <%= form.password_field :password_confirmation, :class => 'form-control', :placeholder => 'Password' %>
+      <%= msg_form_errors @user, :password_confirmation %>
+    </div>
+
+    <div class="form-group">
+      <%= form.label :address, 'Address' %>
+      <%= form.text_field :address, :class => 'form-control', placeholder: 'Address' %>
+      <%= msg_form_errors @user, :address %>
+    </div>
+
+    <div class="form-group">
+      <%= form.label :address_deliver, 'Address deliver' %>
+      <%= form.text_field :address_deliver, :class => 'form-control', placeholder: 'Address deliver' %>
+      <%= msg_form_errors @user, :address_deliver %>
+    </div>
+
+    <div class="form-group">
+      <%= form.label :Company, 'Company' %>
+      <%= form.text_field :company, :class => 'form-control', placeholder: 'Company' %>
+    </div>
+    
+    <div class="form-group">
+      <%= form.label :phone, 'Phone' %>
+      <%= form.text_field :phone, :class => 'form-control', placeholder: 'Phone' %>
+      <%= msg_form_errors @user, :phone %>
+    </div>
+
+    <hr class="mb-4">
+    <%= button_tag :class => 'btn btn-primary', :type => 'submit' do %>
+      <i class="fas fa-user"></i> Create an account
+    <% end %>
+    <%#= form.submit 'Create an account', :class => 'btn btn-primary', :type => 'submit'%>      
+    
+  </div>
+<% end %>

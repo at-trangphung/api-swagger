@@ -1,0 +1,160 @@
+<% content_for :title, @product.name %>
+<% content_for :script, javascript_include_tag(:shop) %>
+<% content_for :script do %>
+  
+  <!-- include smoothproducts // product zoom plugin  -->
+  <!-- <script type="text/javascript" src="../assets/js/smoothproducts.min.js"></script> -->
+
+  <!-- jquery-migrate only for product details -->
+  <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.15.1/jquery.validate.min.js"></script> -->
+
+<% end %>
+  <div class="container main-container headerOffset1">
+    <div class="row">
+      <div class="breadcrumbDiv col-lg-12">
+        <ul class="breadcrumb">
+          <li><%= link_to 'Home', root_path %></li>
+          <li><%= link_to @category.name, shop_path(@category.id) %></li>
+          <li class="active"><%= @product.name %></li>
+        </ul>
+      </div>
+    </div>
+    <div class="row transitionfx">
+      
+      <!-- left column -->
+      <div class="col-lg-6 col-md-6 col-sm-6">
+        <!-- product Image and Zoom -->
+        <div class="main-image col-lg-12 no-padding">
+          <%= cl_image_tag @product.image_link, alt: 'img',
+           height: "555px",width: "555px" %>
+           <% if @service_user.current_user %>
+            <% if @service_favorite.check_like(@service_user.current_user.id, @product.id).nil? %>
+              <div class="favorite"
+                id="product_<%= @product.id %>">
+                <%= form_with(url: favorites_path, method: :post, local: true) do |form| %>
+                  <%= form.hidden_field :user_id, 
+                    value: @service_user.current_user.id %>
+                  <%= form.hidden_field :product_id, value: @product.id %>
+                  <button type="submit">
+                    <i class="far fa-heart"></i>
+                    <span><%= @product.like ? @product.like : 0 %></span>
+                  </button>
+                <% end %>
+              </div>
+            <% else %>
+              <div class="favorite"
+                id="product_<%= @product.id %>">
+                <%= form_with(url: favorite_path(@service_favorite.check_like(
+                  @service_user.current_user.id, @product.id)), method: :delete,local: true) do |form| %>
+                  <%= form.hidden_field :user_id, value: @service_user.current_user.id %>
+                  <%= form.hidden_field :product_id, value: @product.id %>
+                  <button type="submit">
+                    <i class="fas fa-heart"></i>
+                    <span><%= @product.like ? @product.like : 0 %></span>
+                  </button>
+                <% end %>
+              </div>
+            <% end %>
+          <% else %>
+            <div class="favorite">
+              <button type="submit" disabled>
+                <i class="fas fa-heart"></i>
+                <span><%= @product.like ? @product.like : 0 %></span>
+              </button>
+            </div>  
+          <% end %>
+        </div>
+      </div>
+      <!--/ left column end -->
+
+        <!-- right column -->
+        <div class="col-lg-6 col-md-6 col-sm-5">
+          <h1 class="product-title"><%= @product.name %></h1>
+
+            <div class="rating">
+              <p><span><i class="fa fa-star"></i></span> <span><i class="fa fa-star"></i></span> <span><i
+                  class="fa fa-star"></i></span> <span><i class="fa fa-star"></i></span> <span><i
+                  class="far fa-star "></i></span> <span class="ratingInfo"> <span> / </span> <a
+                  data-target="#modal-review" data-toggle="modal"> Write a review</a> </span></p>
+            </div>
+            
+            <div class="details-description cate-f-20">
+              <p><%= @product.description %> </p>
+            </div>
+            <%= form_with scope: :cart, url: carts_path, local: true do |form| %>
+              <div class="product-price">
+                <h3 class="product-title">Price</h3>
+                <%= form.select :price, @price.map { |p| [p.price, 
+                  {:id => "price_#{p.size_id}"}] }.uniq, {}, { class: 'price-sales', onclick: 'select_size_fnc()' } %> $
+              </div>
+              <div class="productFilter productFilterLook2">
+                <div class="row">
+                  <div class="col-lg-6 col-sm-6 col-xs-6">
+                    <h3 class="product-title">Size</h3>
+                    <div class="filterBox">
+                      <%= form.select :size, @sizes.map { |size| [size.name, {:id => "size_#{size.id}"}] }, {}, { class: 'form-control', onclick: 'select_price_fnc()' } %>
+                    </div>
+                  </div>
+                  <div class="col-lg-6 col-sm-6 col-xs-6">
+                    <h3 class="product-title">Type</h3>
+                    <div class="filterBox">
+                      <%= form.select :type, @types.map { |type| [type.name] }, {}, { class: 'form-control' } %>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="cart-actions">
+                <div class="add to row">
+                  <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                    <%= form.hidden_field :product_id, value: @product.id %>
+                    <%= form.hidden_field :quantity, value: 1 %>
+                    <%= form.submit 'Add to Cart', class: 'btn btn-primary btn-fs' %>
+
+                  </div>
+                  
+                </div>
+                <div style="clear:both"></div>
+              </div>
+
+            <% end %>
+
+            <p> SHARE </p>
+
+            <div class="socialIcon">
+              <a target="_blank" href="http://facebook.com"><i class="fab fa-facebook-f"></i></a> 
+              <a a target="_blank" href="http://twitter.com"><i class="fab fa-twitter"></i></a>
+              <a target="_blank" href="https://plus.google.com"><i class="fab fa-google-plus-g"></i></a>
+              <a target="_blank" href="http://pinterest.com"><i class="fab fa-pinterest"></i></a>
+            </div>
+          </div>
+          <!--/.product-share-->
+
+      </div>
+      <!--/ right column end -->
+
+    </div>
+    <!--/.row-->
+    <div class="product-overview-tab" style="margin: 20px 0px;">
+      <div class="container">
+        <div class="row">
+          <div class="col-xs-12">
+            <div class="product-tab-inner">
+            <h3>Comments</h3>
+              <%if @service_user.current_user %>
+                <%= render "comment_form" %>
+              <% end %>
+              <%= render "comment" %>
+            </div>
+          </div>
+          <div class="col-lg-12 text-center">
+            <%= will_paginate(@comments, 
+            renderer: BootstrapPagination::Rails) %>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div style="clear:both"></div>
+  </div>
+<!-- /main-container -->

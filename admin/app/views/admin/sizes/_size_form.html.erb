@@ -1,0 +1,14 @@
+<%= form_with model: @size, local: true, class: 'form-horizontal', 
+  html: { role: 'form'} do |f| %>
+
+  <div class="form-group">
+    <%= f.label :name %>
+    <%= f.text_field :name, class: "form-control", placeholder: "Input size" %>
+  </div>
+  <div class="col-sm-offset-2 col-sm-2">
+    <%= link_to "Cancel" , sizes_path ,class: "btn btn-primary"%>
+  </div>
+  <div class="col-sm-offset-2 col-sm-2">
+    <%= f.submit ("Save"),class: "btn btn-primary" %>
+  </div>
+<% end %>

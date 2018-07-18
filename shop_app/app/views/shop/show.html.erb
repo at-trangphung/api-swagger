@@ -1,0 +1,93 @@
+<% content_for :title, @categories.name %>
+<% content_for :script, javascript_include_tag(:shop) %>
+
+<div class="w100 productFilter clearfix">
+  <p class="pull-left"> Showing <strong><%= @productByCategory.size %></strong> products </p>
+</div>
+
+<div class="row  categoryProduct xsResponse clearfix">
+  <% @productByCategory.each do |product| %>
+    <div class="item col-sm-4 col-lg-4 col-md-4 col-xs-6" 
+      style="height: 476px; display: flex;">
+      <div class="product">
+        <% if @service_user.current_user %>
+          <% if @service_favorite.check_like(@service_user.current_user.id, product.id).nil? %>
+            <div class="favorite"
+              id="product_<%= product.id %>", style= "width: 50px;">
+              <%= form_with(url: favorites_path, method: :post, local: true) do |form| %>
+                <%= form.hidden_field :user_id, 
+                  value: @service_user.current_user.id %>
+                <%= form.hidden_field :product_id, value: product.id %>
+                <button type="submit">
+                  <i class="far fa-heart"></i>
+                  <span><%= product.like ? product.like : 0 %></span>
+                </button>
+              <% end %>
+            </div>
+          <% else %>
+            <div class="favorite"
+              id="product_<%= product.id %>">
+              <%= form_with(url: favorite_path(@service_favorite.check_like(
+                @service_user.current_user.id, product.id)), method: :delete,local: true) do |form| %>
+                <%= form.hidden_field :user_id, value: @service_user.current_user.id %>
+                <%= form.hidden_field :product_id, value: product.id %>
+                <button type="submit">
+                  <i class="fas fa-heart"></i>
+                  <span><%= product.like ? product.like : 0 %></span>
+                </button>
+              <% end %>
+            </div>
+          <% end %>
+        <% else %>
+          <div class="favorite">
+            <button type="submit" disabled>
+              <i class="fas fa-heart"></i>
+              <span><%= product.like ? product.like : 0 %></span>
+            </button>
+          </div>  
+        <% end %>
+
+        <div class="image" style="height: 200px; width: 260px">
+          <%= link_to product_path(product) do %>
+            <%= cl_image_tag product.image_link, alt: 'img', height: "200px",
+              width: "262px"%>
+          <% end %>
+          <div class="promotion"><span class="new-product"> NEW</span><%#= product.discount%></div>
+        </div>
+        <div class="description">
+          <h4><%= product.name %></a></h4>
+            <p><%= product.description%></p>
+          <span class="size"><%= product.sizes.first.name %></span>
+        </div>
+        <div class="price">
+          <span class="price"><%= product.product_options.first.price %>$</span>
+        </div>
+        <div class="action-control">
+          <%= form_with scope: :cart, url: carts_path, local: true do |form| %>
+            <%= form.hidden_field :price, value: product.product_options.first.price %>
+            <%= form.hidden_field :size, value: product.sizes.first.name %>
+            <%= form.hidden_field :type, value: product.types.first.name %>
+            <%= form.hidden_field :product_id, value: product.id %>
+            <%= form.hidden_field :quantity, value: 1 %>
+            <%= form.submit 'Add to Cart', class: 'btn btn-primary' %>
+          <% end %>
+        </div>
+      </div>
+    </div>
+  <% end %>
+</div>
+  <% if @lengh < 10 %>
+    <div class="row categoryFooter">
+      <div class="col-lg-offset-4 col-lg-8 ">
+        <ul class="pagination pagination">
+          <li class="prev disabled"><span>&#8592; Previous</span></li>
+          <li class="active"><span>1</span></li> 
+          <li class="next"><a>Next &#8594;</a></li>
+        </ul>
+      </div>
+    </div>
+  <% end %> 
+  <div class="col-lg-offset-4 col-lg-8 ">
+    <%= will_paginate(@productByCategory, renderer: BootstrapPagination::Rails) %>
+  </div>
+</div>

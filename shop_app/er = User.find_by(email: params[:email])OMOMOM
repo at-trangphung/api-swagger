@@ -1,0 +1,24 @@
+=> [32m#<User:0x00007fba3e9ed9f0[0m
+ id: [1;34m3[0m,
+ email: [31m[1;31m"[0m[31mbadbyboyxyzkt@yahoo.com.vn[1;31m"[0m[31m[0m,
+ password_digest:
+  [31m[1;31m"[0m[31m$2a$10$dKwn/aTRzjqdTtihiZlBfutwIP/08wyZHExC3Vk2fU91WBEsMVqGa[1;31m"[0m[31m[0m,
+ password_confirmation: [1;36mnil[0m,
+ first_name: [31m[1;31m"[0m[31mTran[1;31m"[0m[31m[0m,
+ last_name: [31m[1;31m"[0m[31mHieu[1;31m"[0m[31m[0m,
+ phone: [1;36mnil[0m,
+ address: [1;36mnil[0m,
+ remember_digest: [1;36mnil[0m,
+ reset_digest: [1;36mnil[0m,
+ last_login: [1;36mnil[0m,
+ reset_sent_at: [1;36mnil[0m,
+ activation_digest:
+  [31m[1;31m"[0m[31m$2a$10$Pj57ODrhZiAWp4YWiLUBfuAhE1VyO8KI7tjy7ppXv7wOKCFzYxdDi[1;31m"[0m[31m[0m,
+ activated_at: [1;34;4mThu[0m, [1;34m14[0m [1;34;4mJun[0m [1;34m2018[0m [1;34m03[0m:[1;34m51[0m:[1;34m05[0m [1;34;4mUTC[0m [1;34m+00[0m:[1;34m00[0m,
+ activated: [1;36mtrue[0m,
+ role_id: [1;36mnil[0m,
+ created_at: [1;34;4mMon[0m, [1;34m04[0m [1;34;4mJun[0m [1;34m2018[0m [1;34m10[0m:[1;34m53[0m:[1;34m08[0m [1;34;4mUTC[0m [1;34m+00[0m:[1;34m00[0m,
+ updated_at: [1;34;4mThu[0m, [1;34m14[0m [1;34;4mJun[0m [1;34m2018[0m [1;34m03[0m:[1;34m51[0m:[1;34m05[0m [1;34;4mUTC[0m [1;34m+00[0m:[1;34m00[0m,
+ avatar: [1;36mnil[0m,
+ company: [1;36mnil[0m,
+ address_deliver: [1;36mnil[0m[32m>[0m

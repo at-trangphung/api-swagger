@@ -1,0 +1,19 @@
+---
+development:
+  cloud_name: hieugakt
+  api_key: '282713197263733'
+  api_secret: v_-z4P5MMFvqEoMGlSRjI12dULg
+  enhance_image_tag: true
+  static_image_support: false
+production:
+  cloud_name: hieugakt
+  api_key: '282713197263733'
+  api_secret: v_-z4P5MMFvqEoMGlSRjI12dULg
+  enhance_image_tag: true
+  static_image_support: true
+test:
+  cloud_name: hieugakt
+  api_key: '282713197263733'
+  api_secret: v_-z4P5MMFvqEoMGlSRjI12dULg
+  enhance_image_tag: true
+  static_image_support: false

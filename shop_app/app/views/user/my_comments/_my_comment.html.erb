@@ -1,0 +1,16 @@
+<% @my_comments.each_with_index do |my_comment, index| %>
+<tr>
+  <% params[:page] = 1 if params[:page].nil? %>
+
+  <td class="text-center">
+    <%= (params[:page].to_i - 1) * 5 + index.to_i + 1 %>
+  </td>
+  <td class="text-center">
+    <%= cl_image_tag my_comment.product.image_link, alt: 'img', 
+      width: '70', height: '50' %>
+  </td>
+  <td><%= my_comment.product.name %></td>
+  <td><%= my_comment.content %></td>
+  <td><%= l(my_comment.created_at, format: '%B, %d %Y - %H:%M:%S') %></td>
+</tr>
+<% end %>

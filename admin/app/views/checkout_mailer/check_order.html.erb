@@ -1,0 +1,95 @@
+<% content_for :title, 'Check Order' %>
+<div class="container main-container headerOffset1">
+  <div class="row">
+    <div class="col-lg-12 ">
+      <div class="row userInfo">
+
+        <div class="thanxContent text-center">
+          <h1> Thank you for your order <%= link_to "# #{@transaction.id}", "http://localhost:3000/checkout/#{@transaction.id}" %></h1>
+          <h4>we'll let you know when your items are on their way</h4>
+          <h4>Items to be Shipped</h4>
+
+        </div>
+
+        <div class="col-lg-7 col-center">
+          <p>Customer: <%= @customer.first_name %> <%= @customer.last_name %></p>
+          <p>Phone: <%= @customer.phone %> </p>
+          <p>Time Shipping: <%= l( @transaction.delivery_time,format:'%H:%M:%S, %B %d %Y') %> </p>
+          <% if @customer.last_name != @transaction.receiver %>
+            <p>Receiver: <%= @transaction.receiver %></p>
+            <p>Address Deliver: <%= @transaction.address_deliver_rec %></p>
+          <% else %>
+            <p>Address Deliver: <%= @customer.address_deliver %></p>
+            <p>Phone Receiver: <%= @customer.phone %></p>
+          <% end %>
+          <% unless @transaction.comment.blank? %>
+            <p>Comment: <%= @transaction.comment %></p>
+          <% end %>
+        </div>
+
+        <div class="col-lg-7 col-center">
+          <div class="cartContent table-responsive  w100">
+            <table style="width:100%" class="cartTable cartTableBorder">
+              <tbody>
+                  <tr class="CartProduct cartTableHeader">
+                    <td style="width:15%"> Product</td>
+                    <td style="width:20%">Details</td>
+                    <td style="width:15%">Size</td>
+                    <td style="width:15%">Quantity</td>
+                    <td style="width:35%">Total</td>
+                  </tr>
+                  <% @order_items.each do |order_detail| %>
+                    <tr class="CartProduct">
+                      <td class="CartProductThumb">
+                        <div>
+                            <%= link_to order_detail.product do %>
+                              <%= cl_image_tag order_detail.product.image_link, :class => 'img-responsive', alt: 'img', width: 50, height: 50 %>
+                            <% end %>
+                        </div>
+                      </td>
+                      <td>
+                        <div class="CartDescription">
+                          <h4>
+                            <%= link_to order_detail.product do %>
+                              <%= order_detail.product.name %>
+                            <% end %>
+                          </h4>
+                          <div class="price">
+                            <span>
+                              <%= order_detail.price %>$
+                            </span>
+                          </div>
+                        </div>
+                      </td>
+                      <td><%= order_detail.size %></td>
+                      <td>
+                        <%= label_tag "#{order_detail.quantity}", nil,  class: "btn"%>
+                      </td>
+                      <td class="price"><%= order_detail.quantity.to_f * order_detail.price.to_f %>$</td>
+                    </tr>
+                  <% end %>
+
+
+              </tbody>
+            </table>
+          </div>
+
+          <div class="cartFooter w100">
+            <div class="box-footer">
+              <h4>Total payment</h4>
+              <span><h4 class="price"><%= @total_price %>$</h4></span>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!--/row end-->
+
+    </div>
+
+    <!--/rightSidebar-->
+
+  </div>
+  <!--/row-->
+
+  <div style="clear:both"></div>
+</div>

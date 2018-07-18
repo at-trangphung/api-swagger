@@ -1,0 +1,44 @@
+<div class="col-lg-3 col-md-3 col-sm-5 rightSidebar">
+  <div class="contentBox">
+    <div class="w100 costDetails">
+      <div class="table-block" id="order-detail-content">
+        <div class="w100 cartMiniTable">
+          <table id="cart-summary" class="std table">
+            <tbody>
+              <tr>
+                <td>Total products</td>
+                <td class="price"><%= @count_products %></td>
+              </tr>
+              <tr style="">
+                <td>Shipping</td>
+                <td class="price"><span class="success">Free shipping!</span></td>
+              </tr>
+              <tr class="cart-total-price ">
+                <td>Total (tax excl.)</td>
+                <td class="price">0</td>
+              </tr>
+              <tr>
+                <td>Total tax</td>
+                <td class="price" id="total-tax"><%= @total%>$</td>
+              </tr>
+              <tr>
+                <td> Total</td>
+                <td class=" site-color" id="total-price"><%= @total%>$</td>
+              </tr>
+              <!-- <tr>
+                <td colspan="2">
+                  <div class="input-append couponForm">
+                    <input class="col-lg-8" id="appendedInputButton" type="text"
+                    placeholder="Coupon code">
+                    <button class="col-lg-4 btn btn-success" type="button">Apply!</button>
+                  </div>
+                </td>
+              </tr> -->
+            </tbody>
+          </table>
+        </div>
+        
+      </div>
+    </div>
+  </div>
+</div>

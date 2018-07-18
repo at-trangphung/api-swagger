@@ -1,0 +1,20 @@
+<% @sizes.each_with_index do |size, index| %>
+<tr>
+  <% params[:page] = 1 if params[:page].nil? %>
+
+  <td><%= (params[:page].to_i - 1) * 5 + index.to_i + 1 %></td>
+  <td><%= size.name %></td>
+  <td>
+  <%= link_to size_path(size), 
+    method: :delete,
+    data: {confirm: "Do you want detele this size"} do %>
+    <i class="pe-7s-trash"></i>
+  <% end %>
+  |
+  <%= link_to edit_size_path(size) do %>
+    <i class="pe-7s-pen"></i>
+  <% end %>
+  </td>
+</tr>
+<% end %>
+

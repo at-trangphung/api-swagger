@@ -1,0 +1,22 @@
+<%= form_with model: @article, local: true, class: 'form-horizontal', 
+  html: { role: 'form'} do |f| %>
+  <div class="form-group">
+    <%= f.label :title %>
+    <%= f.text_field :title, class: "form-control", placeholder: "Input title" %>
+  </div>
+  <div class="form-group">
+    <%= f.label :content, "Content" %>
+    <%= f.text_area :content, class: "form-control",size: "30x10" %>
+  </div>
+  <div class="form-group">
+    <%= f.label :image_link %>
+    <%= f.file_field :image_link, accept: 'image/jpeg, image/gif, image/png',
+      class: "form-control" %>
+  </div>
+  <div class="col-sm-offset-2 col-sm-2">
+    <%= link_to "Cancel" , articles_path ,class: "btn btn-primary"%>
+  </div>
+  <div class="col-sm-offset-4 col-sm-2">
+    <%= f.submit ("Save"),class: "btn btn-primary" %>
+  </div>
+<% end %>

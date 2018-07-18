@@ -1,0 +1,488 @@
+<div class="w100 clearfix">
+  <%= form_for @transaction do |form| %>
+
+    <div class="row userInfo" id="step-1">
+      <div class="col-lg-12">
+        <h2 class="block-title-2"> To add a new address, please fill out the form below. 
+        </h2>
+      </div>
+
+      <% if @service_user.current_user %>
+        <%= form.fields_for :customer do |customer| %>
+          <div class="col-xs-12 col-sm-6">
+            <div id="div-cus-1" class="form-group required">
+              <%= customer.label :first_name, 'First Name', for: 'InputName' %>
+                <sup>*</sup>
+              <%= customer.text_field :first_name, :class => 'form-control', placeholder: 'First Name', type: 'text', id: 'object_address_1', value: @service_user.current_user.first_name %>
+            </div>
+            <div id="div-cus-2" class="form-group required">
+              <%= customer.label :last_name, 'Last Name', for: 'InputName' %>
+              <sup>*</sup>
+              <%= customer.text_field :last_name, :class => 'form-control', placeholder: 'Last Name', type: 'text', id: 'object_address_2', value: @service_user.current_user.last_name %>
+            </div>
+            <div id="div-cus-3" class="form-group required">
+              <%= customer.label :email, 'Email', for: 'InputEmail' %>
+              <sup>*</sup>
+              <%= customer.email_field :email, :class => 'form-control', placeholder: 'Email', type: 'text', id: 'object_address_3', value: @service_user.current_user.email %>
+            </div>
+            <div id="div-cus-4" class="form-group">
+              <%= customer.label :company, 'Company', for: 'InputCompany'%>
+              <%= customer.text_field :company, :class => 'form-control', placeholder: 'Company', type: 'text', id: 'object_address_4', value: @service_user.current_user.company %>
+            </div>
+          </div>
+
+          <div class="col-xs-12 col-sm-6">
+            <div id="div-cus-5" class="form-group required">
+              <%= customer.label :address, 'Address', for: 'Address' %>
+              <sup>*</sup>
+              <%= customer.text_field :address, :class => 'form-control', placeholder: 'Address', type: 'text' , id: 'object_address_5', value: @service_user.current_user.address %>
+            </div>
+            <div id="div-cus-6" class="form-group required">
+              <%= customer.label :address_deliver, 'Address deliver', for: 'Address' %>
+              <sup>*</sup>
+              <%= customer.text_field :address_deliver, :class => 'form-control', placeholder: 'Address deliver', type: 'text', id: 'object_address_6', value: @service_user.current_user.address_deliver %>
+            </div>
+            <div id="div-cus-7" class="form-group required">
+              <%= customer.label :phone, 'Mobile phone', for: 'Address' %>
+              <sup>*</sup>
+              <%= customer.text_field :phone, :class => 'form-control', placeholder: 'Phone', min: 0, type: 'number', id: 'object_address_7', value: @service_user.current_user.phone %>
+            </div>
+          </div>
+
+          <div class="modal fade" id="modal-cus" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h5 class="modal-title" id="exampleModalLabel">Missing errors!!</h5>
+                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                  </button>
+                </div>
+                <div  id="myModal" class="modal-body">
+                </div>
+                <div class="modal-footer">
+                  <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                </div>
+              </div>
+            </div>
+          </div>
+        <% end %>
+        <div class="cartFooter w100">
+          <div class="box-footer">
+            <div class="pull-left">
+              <%= link_to root_path, class: 'btn btn-primary' do %>
+                <i class="fa fa-arrow-left"></i> &nbsp; Back to Shop </a>
+              <% end %>
+            </div>
+            <div class="pull-right">
+              <%= button_tag type: 'button', class: 'btn btn-primary btn-small', onclick: 'load_steps_checkout(2)' do %>
+                Billing method &nbsp; <i class="fa fa-arrow-circle-right"></i>
+              <% end %>
+            </div>
+          </div>
+        </div>
+        
+      <% else %>
+        <%= form.fields_for :customer do |customer| %>
+          <div class="col-xs-12 col-sm-6">
+            <div id="div-cus-1" class="form-group required">
+              <%= customer.label :first_name, 'First Name', for: 'InputName' %>
+                <sup>*</sup>
+              <%= customer.text_field :first_name, :class => 'form-control', placeholder: 'First Name', type: 'text', id: 'object_address_1' %>
+            </div>
+            <div id="div-cus-2" class="form-group required">
+              <%= customer.label :last_name, 'Last Name', for: 'InputName' %>
+              <sup>*</sup>
+              <%= customer.text_field :last_name, :class => 'form-control', placeholder: 'Last Name', type: 'text', id: 'object_address_2' %>
+            </div>
+            <div id="div-cus-3" class="form-group required">
+              <%= customer.label :email, 'Email', for: 'InputEmail' %>
+              <sup>*</sup>
+              <%= customer.email_field :email, :class => 'form-control', placeholder: 'Email', type: 'text', id: 'object_address_3' %>
+            </div>
+            <div id="div-cus-4" class="form-group">
+              <%= customer.label :company, 'Company', for: 'InputCompany'%>
+              <%= customer.text_field :company, :class => 'form-control', placeholder: 'Company', type: 'text', id: 'object_address_4' %>
+            </div>
+          </div>
+
+          <div class="col-xs-12 col-sm-6">
+            <div id="div-cus-5" class="form-group required">
+              <%= customer.label :address, 'Address', for: 'Address' %>
+              <sup>*</sup>
+              <%= customer.text_field :address, :class => 'form-control', placeholder: 'Address', type: 'text' , id: 'object_address_5'%>
+            </div>
+            <div id="div-cus-6" class="form-group required">
+              <%= customer.label :address_deliver, 'Address deliver', for: 'Address' %>
+              <sup>*</sup>
+              <%= customer.text_field :address_deliver, :class => 'form-control', placeholder: 'Address deliver', type: 'text', id: 'object_address_6' %>
+            </div>
+            <div id="div-cus-7" class="form-group required">
+              <%= customer.label :phone, 'Mobile phone', for: 'Address' %>
+              <sup>*</sup>
+              <%= customer.text_field :phone, :class => 'form-control', placeholder: 'Phone', type: 'number', min: 0, id: 'object_address_7' %>
+            </div>
+          </div>
+
+          <div class="modal fade" id="modal-cus" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h5 class="modal-title" id="exampleModalLabel">Missing errors!!</h5>
+                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                  </button>
+                </div>
+                <div  id="myModal" class="modal-body">
+                </div>
+                <div class="modal-footer">
+                  <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                </div>
+              </div>
+            </div>
+          </div>
+        <% end %>
+
+        <div class="cartFooter w100">
+          <div class="box-footer">
+            <div class="pull-left">
+              <%= link_to root_path, class: 'btn btn-primary btn-small' do %>
+                <i class="fa fa-arrow-left"></i> &nbsp; Back to Shop </a>
+              <% end %>
+            </div>
+            <div class="pull-right">
+              <%= button_tag type: 'button', class: 'btn btn-primary btn-small', onclick: 'load_steps_checkout(2)' do %>
+                Billing method &nbsp; <i class="fa fa-arrow-circle-right"></i>
+              <% end %>
+            </div>
+          </div>
+        </div>
+      <% end %> 
+    </div>
+
+    <div class="row userInfo" id="step-2">
+      <div class="col-lg-12">
+        <h2 class="block-title-2"> 
+          To add a billing address, please fill out the form below.
+        </h2>
+      </div>
+
+      <div class="col-xs-12 col-sm-12">
+        <label class="checkbox-inline checkbox-order col-md-5" for="checkboxes-0">
+          <div class="icheckbox_square-green iCheck-margin" style="position: relative;">
+            <input name="checkboxes" id="cb_receiver" checked onclick="cb_receiver_fnc()" type="checkbox">                    
+          </div>
+          My delivery and billing addresses are the same. 
+        </label>
+        <hr>
+      </div>
+
+      <div class="modal fade" id="modal-bill" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="exampleModalLabel">Missing errors!!</h5>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div  id="myModal-bill" class="modal-body">
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            </div>
+          </div>
+        </div>
+      </div>
+      <%= form.fields_for :receiver do |rec| %>
+        <div class="col-xs-12 col-sm-6">
+          <div id="div-bill-1" class="form-group required">
+            <%= rec.label :first_name, 'First Name', for: 'InputName' %>
+              <sup>*</sup>
+            <%= rec.text_field :first_name, :class => 'form-control', placeholder: 'First Name', type: 'text', id: 'object_billing_1' %>
+          </div>
+          <div id="div-bill-2" class="form-group required">
+            <%= rec.label :last_name, 'Last Name', for: 'InputName' %>
+            <sup>*</sup>
+            <%= rec.text_field :last_name, :class => 'form-control', placeholder: 'Last Name', type: 'text', id: 'object_billing_2' %>
+          </div>
+          <div id="div-bill-3" class="form-group required">
+            <%= rec.label :email, 'Email', for: 'InputEmail' %>
+            <sup>*</sup>
+            <%= rec.email_field :email, :class => 'form-control', placeholder: 'Email', type: 'text', id: 'object_billing_3' %>
+          </div>
+          <div id="div-bill-4" class="form-group">
+            <%= rec.label :company, 'Company', for: 'InputCompany'%>
+            <%= rec.text_field :company, :class => 'form-control', placeholder: 'Company', type: 'text' , id: 'object_billing_4' %>
+          </div>
+        </div>
+
+        <div class="col-xs-12 col-sm-6">
+          <div id="div-bill-5" class="form-group required">
+            <%= rec.label :address, 'Address', for: 'Address' %>
+            <sup>*</sup>
+            <%= rec.text_field :address, :class => 'form-control', placeholder: 'Address', type: 'text' , id: 'object_billing_5' %>
+          </div>
+          <div id="div-bill-6" class="form-group required">
+            <%= rec.label :address_deliver, 'Address deliver', for: 'Address' %>
+            <sup>*</sup>
+            <%= rec.text_field :address_deliver, :class => 'form-control', placeholder: 'Address deliver', type: 'text' , id: 'object_billing_6' %>
+          </div>
+          <div id="div-bill-7" class="form-group required">
+            <%= rec.label :phone, 'Mobile phone', for: 'Address' %>
+            <sup>*</sup>
+            <%= rec.text_field :phone, :class => 'form-control', placeholder: 'Phone', type: 'number', id: 'object_billing_7', min: 0 %>
+          </div>
+        </div>
+      <% end %>
+
+      <div class="cartFooter w100">
+        <div class="box-footer">
+          <div class="pull-left">
+            <%= button_tag type: 'button', class: 'btn btn-primary btn-small', onclick: 'load_steps_checkout(1)' do %>
+              <i class="fa fa-arrow-left"></i> &nbsp; Shipping address 
+            <% end %>
+          </div>
+          <div class="pull-right">
+            <%= button_tag type: 'button', class: 'btn btn-primary btn-small', onclick: 'load_steps_checkout(3)' do %>
+              Shipping method &nbsp; <i class="fa fa-arrow-circle-right"></i> 
+            <% end %>
+          </div>
+        </div>
+      </div>
+    </div>
+    
+    <%= form.fields_for :transaction do |tran| %>
+      <div class="row userInfo" id="step-3">
+        <div class="col-lg-12">
+          <h2 class="block-title-2"> Choose your delivery time 
+          </h2>
+        </div>
+        <div class="col-xs-12 col-sm-12">
+          <div class="w100 row">
+            <div class="form-group col-lg-4 col-sm-4 col-md-4 -col-xs-12">
+              <label for="id_country">Time</label>
+              <select class="form-control" required="" aria-required="true" id="id_country" name="id_country" tabindex="-1" aria-hidden="true" onclick="delivery_time()">
+                <option selected="selected" id="now">Now!</option>
+                <option id="later">Later!</option>
+              </select>
+            </div>
+              <div id="id-hours" class="form-group  col-lg-4 col-sm-4 col-md-4 -col-xs-12">
+                  <%= tran.label :hours, 'Hours' %>
+                    <sup>*</sup>
+                  <%= tran.text_field :hours, :class => 'form-control', placeholder: 'Enter hours', type: 'text' %>
+              </div>
+              <div id="id-minutes" class="form-group  col-lg-4 col-sm-4 col-md-8 -col-xs-12">
+                  <%= tran.label :minutes, 'Minutes' %>
+                    <sup>*</sup>
+                  <%= tran.text_field :minutes, :class => 'form-control', placeholder: 'Enter minutes', type: 'text' %>
+              </div>
+
+            <div class="form-group col-lg-12 col-sm-12 col-md-12 -col-xs-12">
+                <table style="width:100%" class="table-bordered table tablelook2">
+                    <tbody>
+                    <tr>
+                        <td> Carrier</td>
+                        <td>Method</td>
+                        <td>Information</td>
+                        <td>Price!</td>
+                    </tr>
+                    <tr>
+                        <td><label class="radio">
+                            <div class="iradio_square-green iChk iCheck-margin checked" style="position: relative;"><input type="radio" name="optionsRadios" id="optionsRadios1" value="option1" checked="" style="position: absolute; opacity: 0;"><ins class="iCheck-helper" style="position: absolute; top: 0%; left: 0%; display: block; width: 100%; height: 100%; margin: 0px; padding: 0px; background: rgb(255, 255, 255); border: 0px; opacity: 0;"></ins></div>
+                            <i class="fas fa-motorcycle fa-2x"></i> </label></td>
+                        <td>By Road</td>
+                        <td>Pick up in-store</td>
+                        <td>Free!</td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+
+          </div>
+        </div>
+
+        <div class="cartFooter w100">
+          <div class="box-footer">
+              <div class="pull-left">
+                <button type="button" class="btn btn-primary btn-small" onclick="load_steps_checkout(2)">
+                  <i class="fa fa-arrow-left"></i> &nbsp; Shipping method 
+                </button>
+              </div>
+              <div class="pull-right">
+                <button type="button" onclick="load_steps_checkout(4)" class="btn btn-primary btn-small "> Payment Method &nbsp; <i class="fa fa-arrow-circle-right"></i> 
+                </button>
+              </div>
+          </div>                
+        </div>
+      </div>
+
+      <div class="row userInfo" id="step-4">
+        <div class="col-lg-12">
+          <h2 class="block-title-2"> Payment method </h2>
+          <p>Please select the preferred shipping method to use on this order.</p>
+          <hr>
+        </div>
+        <div class="col-xs-12 col-sm-12">
+          <div class="paymentBox">
+            <div class="panel-group paymentMethod" id="accordion">
+              
+              <div class="panel panel-default">
+                <div class="panel-heading panel-heading-custom">
+                  <h4 class="panel-title"><a class="cashOnDelivery" data-toggle="collapse"
+                   data-parent="#accordion" href="#collapseOne">
+                   <span class="numberCircuil">Option 1</span> <strong> Cash on
+                   Delivery</strong> </a></h4>
+                 </div>
+                 <div id="collapseOne" class="panel-collapse collapse in">
+                  <div class="panel-body">
+                    <p>All transactions are secure and encrypted, and we neverstor To
+                      learn more, please view our privacy policy.</p>
+                      <br>
+                      <label class="radio-inline mr-left" for="radios-4">
+                        <input name="radios" id="radios-4" value="4" type="radio">
+                        Cash On Delivery </label>
+
+                    <div class="form-group" >
+                      <label for="CommentsOrder">Add Comments About Your Order</label>
+                      <%= tran.text_area :comment, :class => 'form-control', size: "26x3" %>
+                    </div>
+                    <div class="form-group clearfix col-sm-12">
+                        <label class="checkbox-inline" for="checkboxes-1">
+                            <div class="icheckbox_square-green iCheck-margin" style="position: relative;">
+                              <input name="checkboxes" id="cb_payment" onclick="cb_payment_fnc()" type="checkbox" style="position: absolute;">
+                            </div>
+                            I have read and agree to the 
+                            <%= link_to 'Terms & Conditions', terms_conditions_path, target: "_blank" %>
+                        </label>
+                    </div>
+                    <div class="pull-right">
+                      <button id="btn_payment" disabled="true" type="button" class="btn btn-primary btn-small" onclick="load_steps_checkout(5)"> <i class="fa fa-arrow-circle-right"></i> &nbsp; Order 
+                      </button>
+                    </div>
+                   </div>
+                 </div>
+                </div>
+                <div class="panel panel-default">
+                  <div class="panel-heading panel-heading-custom">
+                    <h4 class="panel-title"><a data-toggle="collapse"
+                     data-parent="#accordion" href="#collapseTwo" onclick="load_option_payment(2)">
+                     <span >Option 2</span><strong> PayPal</strong>
+                   </a></h4>
+                 </div>
+                 <div id="collapseTwo" class="panel-collapse collapse">
+                    <div class="panel-body">
+                      <p>All transactions are secure and encrypted, and we neverstor To
+                      learn more, please view our privacy policy.</p>
+                      <br>
+                      <label class="radio-inline mr-left" for="radios-3">
+                        <input name="radios" id="radios-3" value="4" type="radio">
+                        <%= image_tag 'paypal-small.png', height: 18, alt: 'paypal' %>
+                         Checkout with Paypal </label>
+
+                        <div class="form-group">
+                          <label for="CommentsOrder">Add Comments About Your Order</label>
+                          <%= tran.text_area :class => 'form-control', size: "26x3" %>
+                        </div>
+                        <div class="form-group clearfix col-sm-12">
+                            <label class="checkbox-inline" for="checkboxes-1">
+                                <div class="icheckbox_square-green iCheck-margin" style="position: relative;">
+                                  <input name="checkboxes" id="cb_payment" onclick="cb_payment_fnc()" type="checkbox" style="position: absolute;">
+                                </div>
+                                I have read and agree to the 
+                                <%= link_to 'Terms & Conditions', terms_conditions_path, target: "_blank" %>
+                            </label>
+                        </div>
+                        <div class="pull-right">
+                          <button id="btn_payment" disabled="true" type="button" class="btn btn-primary btn-small" onclick="load_steps_checkout(5)"> <i class="fa fa-arrow-circle-right"></i> &nbsp; Order 
+                          </button>
+                        </div>
+                    </div>
+                  </div>
+                </div>                    
+            </div>
+
+          </div>
+
+            <!--/row-->
+        </div>
+
+        <div class="cartFooter w100">
+          <div class="box-footer">
+            <div class="pull-left"><button type="button" class="btn btn-primary btn-small" onclick="load_steps_checkout(3)"> <i class="fa fa-arrow-left"></i> &nbsp; Shipping address </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    <% end %>
+
+    <div class="row userInfo" id="step-5">
+      <div class="col-lg-12">
+          <h2 class="block-title-2"> Review Order </h2>
+      </div>
+
+      <%= form.fields_for :order do |ord| %>
+        <div class="cartContent w100">
+          <table class="cartTable table-responsive" style="width:100%">
+            <tbody>
+              <tr class="CartProduct cartTableHeader">
+                <td style="width:15%">Product</td>
+                <td style="width:30%">Details</td>
+                <td style="width:15%">Size</td>
+                <td style="width:15%">Quantity</td>
+                <td style="width:25%">Total</td>
+              </tr>
+
+              <% @order_items.each do |order_detail| %>
+                <tr class="CartProduct">
+                  <td class="CartProductThumb">
+                    <div>
+                        <%= link_to order_detail.product do %>
+                          <%= cl_image_tag order_detail.product.image_link, :class => 'img-responsive', alt: 'img' %>
+                        <% end %>
+                    </div>
+                  </td>
+                  <td>
+                    <div class="CartDescription">
+                      <h4>
+                        <%= link_to order_detail.product do %>
+                          <%= order_detail.product.name %>
+                        <% end %>
+                      </h4>
+                      <div class="price">
+                        <span>
+                          <%= order_detail.price %>$
+                        </span>
+                      </div>
+                    </div>
+                  </td>
+                  <<td>
+                    <%= order_detail.size %>
+                  </td>
+                  <td>
+                    <%= label_tag "#{order_detail.quantity}", nil,  class: "btn"%>
+                  </td>
+                  <td class="price"><%= order_detail.quantity * order_detail.price.to_f %>$</td>
+                </tr>
+              <% end %>
+            </tbody>
+          </table>
+        </div>
+      <% end %>
+
+      <div class="cartFooter w100">
+        <div class="box-footer">
+          <div class="pull-left"><button type="button" class="btn btn-primary btn-small" onclick="load_steps_checkout(4)"><i class="fa fa-arrow-left"></i> &nbsp; Payment method 
+            </button>
+          </div>
+          <div class="pull-right">
+            <%= button_tag type: 'submit', class: 'btn btn-primary btn-small' do %>
+              Confirm Order &nbsp; <i class="fa fa-check"></i>
+            <% end %>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  <% end %>
+</div>

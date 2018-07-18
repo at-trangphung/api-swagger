@@ -1,0 +1,41 @@
+<% @users.each_with_index do |user, index| %>
+<tr>
+  <% params[:page] = 1 if params[:page].nil? %>
+
+  <td><%= (params[:page].to_i - 1) * 5 + index.to_i + 1 %></td>
+  <%# if user.avatar? %>
+    <%#= image_tag user.avatar.url, :size => "70x50" %>
+  <%# end %>
+  <td><%= user.first_name%></td>
+  <td><%= user.last_name%></td>
+  <td><%= user.email %></td>
+  <td><%= user.address %></td>
+  <td><%= user.phone %></td>
+  <td><%= user.role_id %></td>
+  <td>
+    <% if user.role_id == 1 %>
+      <%= link_to user_path(user), style: 'pointer-events: none;', method: :delete,
+        data: {confirm: "Do you want this user"} do %>
+        <i class="pe-7s-trash"></i>
+      <% end %>
+    <% else %>
+      <%= link_to user_path(user), method: :delete,
+        data: {confirm: "Do you want this user"} do %>
+        <i class="pe-7s-trash"></i>
+      <% end %>
+    <% end %>
+    
+    |<% if user.role_id == 0 %>
+        <%= link_to user_path(id: user.id, role_id: 2),
+          method: :patch, title: "accept" do %>
+          <i class="fas fa-user-tie"></i>
+        <% end %>
+      <% else %>
+        <%= link_to user_path(id: user.id, role_id: 2), style: 'pointer-events: none;',
+          method: :patch, title: "accept" do %>
+          <i class="fas fa-user-tie"></i>
+        <% end %>
+      <% end %>
+  </td>
+</tr>
+<% end %>

@@ -1,0 +1,150 @@
+<div  style="margin-bottom: 20px;">
+  <div>
+    <% if @comments.empty? %> 
+      <p>No comment</p>
+    <% else %>
+      <% @comments.each do |comment|  %>
+      <div id= "comment-<%= comment.id %>">
+        <div class="row item-comment" >
+          <div class="col-md-2 text-right">
+            <% if comment.user[:avatar] %>
+            <%= image_tag( comment.user.avatar.url,
+            class: "img-circle profile_img_comment") %> 
+            <% else %>  
+            <%= image_tag("default-avatar.png", 
+            class: "img-circle profile_img_comment")%>  
+            <% end %>
+          </div>
+          <div class="col-md-10">
+            <div class="row">
+              <div class="col-md-5">
+                <p>
+                  <strong><%= comment.user.first_name%></strong>
+                  <strong><%= comment.user.last_name%></strong>
+                </p>
+              </div>
+              <div class="col-md-5 text-right" style="padding-right: 0px;">
+                <span>
+                  <%= distance_of_time_in_words(Time.now,
+                  comment.created_at) %> later
+                </span>
+              </div>
+            </div>
+            <div class="clearfix"></div>
+            <div class="col-md-10 content-comment">
+              <span>
+                <%= comment["content"] %>
+              </span>
+            </div>  
+            <% if @service_user.current_user %>  
+            <div class="row text-right">
+              <div class="col-md-10" style="padding-right: 0px;">
+                <button onClick="myFunction(<%= comment.id %>)" 
+                  id="btn-<%= comment.id %>" class="btn btn-success green btn-comment">
+                  <i class="fa fa-reply" ></i> 
+                </button>
+                <% if @service_user.current_user.email == comment.user.email%>
+                <%= link_to product_comments_product_path(@product, comment),
+                  method: :delete,
+                  data: {confirm: "Do you want delete" } do %>
+                <%= content_tag :i, "",
+                class: "fa fa-trash btn-lg btn-success green" %>
+                <% end %>
+                <% end %>
+              </div>
+            </div>
+            <% end %>
+          </div>
+        </div>  
+        <% @comment_child = CommentProduct.where(parent_id: comment.id)%>
+        <% @comment_child.each do |comment_child| %>
+        <div id="comment-child-<%=comment.id%>" 
+          style="padding: 5px;">
+          <div class="card-body">
+            <div class="row item-comment">
+              <div class="col-sm-offset-2 col-md-1 test-right" >
+                <% if comment_child.user[:avatar] %>
+                <%= image_tag(comment_child.user.avatar.url, 
+                class: "img-circle profile_img_comment") %> 
+                <% else %>  
+                <%= image_tag("default-avatar.png",
+                class: "img-circle profile_img_comment")%>  
+                <% end %>
+              </div>
+              <div class="col-md-9">
+                <div class="row">
+                  <div class="col-md-5">
+                    <p>
+                      <strong><%= comment_child.user.first_name%></strong>
+                      <strong><%= comment_child.user.last_name%></strong>
+                    </p>
+                  </div>
+                  <div class="col-md-5 text-right">
+                    <span>
+                      <%= distance_of_time_in_words(Time.now,
+                      comment.created_at) %> later
+                    </span>
+                  </div>
+                </div>
+                <div class="col-md-10 content-comment">
+                  <span>
+                    <%= comment_child["content"] %>
+                  </span>
+                </div>  
+                <% if @service_user.current_user %> 
+                <div class="row text-right">
+                  <div class=" col-sm-offset-5  col-md-5">
+                    <% if @service_user.current_user.email == comment.user.email%>
+                      <%= link_to product_comments_product_path(@product, comment_child),
+                        method: :delete,
+                        data: {confirm: "Do you want delete" } do %>
+                      <%= content_tag :i, "",
+                      class: "fa fa-trash btn-lg btn-success green" %>
+                      <% end %>
+                    <% end %>
+                  </div>
+                </div>
+                <% end %>  
+              </div>
+            </div>
+          </div>
+        </div>
+        <% end %>
+        </div>
+        <% end %>
+      </div>
+    <% end %> 
+</div>
+
+<script>
+  function myFunction(id) {
+  var parent = document.getElementById("comment-"+id);
+  var child =  document.getElementById("comment-child-"+id);
+  var parent_id = id 
+  document.getElementById("btn-"+id).disabled = true;
+  var string = 
+  '<div class="row" style="margin-top: 10px;">'+
+    '<div class="col-sm-offset-1 col-sm-2 text-right" >'+
+      '<h4>Reply:</h4>'+
+    '</div>' +
+    '<div class="col-md-9">'+
+      '<div class="clearfix"></div>' +
+      '<%= form_with(scope: :comment_product, 
+        url: product_comments_product_index_path(@product), local: true) do |f| %>' +
+        '<div>' +
+          '<input name="comment_product[content]" class="pb-cmnt-textarea"></input>'+
+          '<input name="comment_product[parent_id]" value= "'+ parent_id +'" type="hidden"></input>'+
+          '<br>'+
+          '<input type="submit" name="commit" value="Save" data-disable-with="Save" class= "btn btn-success green">' +
+        '</div>' +
+      '<% end %>'+
+  '</div>';
+
+  if(child === null){
+    $("#comment-"+id).append(string);
+  } else
+  $("#comment-"+id).last().append(string);
+  }
+</script>
+
+

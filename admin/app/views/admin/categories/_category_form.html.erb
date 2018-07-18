@@ -1,0 +1,21 @@
+<%= form_with model: @category, local: true, class: 'form-horizontal', 
+  html: { role: 'form'} do |f| %>
+
+  <div class="form-group">
+    <%= f.label :name %>
+    <%= f.text_field :name, class: "form-control", placeholder: "Input category name" %>
+    <%= msg_form_errors @category, :name %>
+    </div>
+  <div class="form-group">
+    <%= f.label :parent_id, "Parent" %>
+    <%= select("category", "parent_id", @categories.collect {
+      |p| [ p.name, p.id ] }, 
+      {include_blank:'None'},{ class:"form-control" })%>
+  </div>
+  <div class="col-sm-2">
+    <%= link_to "Cancel" , categories_path ,class: "btn btn-primary"%>
+  </div>
+  <div class="col-sm-offset-2 col-sm-2">
+    <%= f.submit ("Save"),class: "btn btn-primary" %>
+  </div>
+<% end %>

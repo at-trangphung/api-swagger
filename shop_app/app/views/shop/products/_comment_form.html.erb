@@ -1,0 +1,30 @@
+<div class="row ">
+  <div class="col-md-2 text-center">
+    <% if @service_user.current_user["avatar"] %>
+      <%= image_tag(@service_user.current_user.avatar.url, 
+        class: "img-circle profile_img_comment") %> 
+    <% else %>  
+      <%= image_tag("default-avatar.png", 
+        class: "img-circle profile_img_comment")%>  
+    <% end %>
+    <p>
+      <strong><%= @service_user.current_user.first_name%></strong>
+      <strong><%= @service_user.current_user.last_name%></strong>
+    </p>
+  </div>
+  <div class="col-md-10">
+    <div class="widget-area no-padding blank">
+      <%= form_with(scope: :comment_product, 
+          url: product_comments_product_index_path(@product), 
+          local: true) do |f| %>
+        <div>
+          <%= f.text_field :content,  placeholder: "Write your comment here!",
+            class:"pb-cmnt-textarea" %>
+        </div>
+        <%= f.hidden_field :parent_id, value: 0 %>
+        <%= f.submit 'Save', class: "btn btn-primary float-xs-right"%>
+      <% end %>
+    </div>
+  </div>
+</div>
+

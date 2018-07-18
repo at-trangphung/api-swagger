@@ -1,0 +1,39 @@
+<!--Category-->
+<div class="panel panel-default">
+  <div class="panel-heading">
+    <h4 class="panel-title"><a data-toggle="collapse" href="#collapseCategory"
+                   class="collapseWill active cate-f-20 ">
+      <span class="pull-left"> <i class="fa fa-caret-right"></i>
+      </span> Category </a></h4>
+  </div>
+  <div id="collapseCategory" class="panel-collapse collapse in">
+    <div class="panel-body">
+
+      <% if @categories %>
+        <% @categories.each do |categories| %>
+          <ul class="nav nav-pills nav-stacked tree">
+            <li class="dropdown-tree close-tree">
+              <a class="dropdown-tree-a cate-f-15">
+                <% @category_child = Category.where(parent_id: categories.id,status: "exist")%>
+                <span class="badge pull-right"><%= @category_child.size %></span> 
+                  <%= categories.name %> 
+              </a>
+              
+              <% @category_child.each do |category_child| %>
+              <ul class="category-level-2 dropdown-menu-tree">
+                <li class="dropdown-tree">
+                  <%= link_to shop_path(category_child) do %>
+                    <%= category_child.name %>
+                  <% end %>
+                </li>
+              </ul>
+              <% end %>
+            </li>
+          </ul> 
+        <% end %>
+      <% end %>
+         
+    </div>
+  </div>
+</div>
+<!--/Category menu end-->
