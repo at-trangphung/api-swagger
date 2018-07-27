@@ -1,5 +1,5 @@
 Rails.application.routes.draw do
-
+  get '/docs' => redirect('/api_html/dist/index.html?url=/apidocs/api-docs.json')
   root 'shop#index'
   
   get '/search' => 'shop#search'
@@ -45,6 +45,18 @@ Rails.application.routes.draw do
     resources :password_resets, only: [:new, :create, :edit, :update]
     resources :customers
     resources :my_comments
+  end
+
+  constraints subdomain: 'api' do
+    # some namespace
+  end
+
+  scope module: 'api' do
+    namespace :v1 do
+      resources :users
+      post '/login' => 'users#login'
+      post '/confirm' => 'users#confirm'
+    end
   end
 end
 
