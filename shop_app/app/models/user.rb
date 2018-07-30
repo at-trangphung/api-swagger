@@ -80,5 +80,15 @@ class User < ApplicationRecord
       errors.add(:avatar, "should be less than 5MB")
     end
   end
+
+  def confirmation_token_valid?
+    (self.confirmation_sent_at + 30.days) > Time.now.utc
+  end
+
+  def mark_as_confirmed!
+    self.activated_digest = nil
+    self.activated_at = Time.now.utc
+    save
+  end
   
 end
