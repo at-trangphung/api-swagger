@@ -14,6 +14,10 @@
     {
       "path": "/apidocs/api/v1/products.{format}",
       "description": "Products Management"
+    },
+    {
+      "path": "/apidocs/api/v1/articles.{format}",
+      "description": "Articles Management"
     }
   ],
   "authorizations": null
