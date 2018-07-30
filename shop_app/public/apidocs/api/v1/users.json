@@ -116,10 +116,10 @@
         {
           "parameters": [
             {
-              "paramType": "path",
-              "name": "id",
-              "type": "integer",
-              "description": "User Id",
+              "paramType": "header",
+              "name": "Authorization",
+              "type": "string",
+              "description": "Authentication token",
               "required": true
             },
             {
@@ -165,8 +165,8 @@
               "required": false
             }
           ],
-          "summary": "Update frofile a existed User",
-          "notes": "Updating frofile a existed User",
+          "summary": "Update profile a existed user",
+          "notes": "Updating profile a existed User",
           "responseMessages": [
             {
               "code": 401,
@@ -234,7 +234,39 @@
       ]
     },
     {
-      "path": "/v1/logout/{id}",
+      "path": "/v1/history",
+      "operations": [
+        {
+          "parameters": [
+            {
+              "paramType": "header",
+              "name": "Authorization",
+              "type": "string",
+              "description": "Authentication token",
+              "required": true
+            }
+          ],  
+          "summary": "List all order user ",
+          "notes": "This lists all the order user",
+          "responseMessages": [
+            {
+              "code": 401,
+              "responseModel": null,
+              "message": "Unauthorized"
+            },
+            {
+              "code": 406,
+              "responseModel": null,
+              "message": "Not Acceptable"
+            }
+          ],
+          "nickname": "Api::V1::Users#history",
+          "method": "get"
+        }
+      ]
+    },
+    {
+      "path": "/v1/remember_me",
       "operations": [
         {
           "parameters": [
@@ -246,8 +278,54 @@
               "required": true
             }
           ],
-          "summary": "Logout",
-          "notes": "Logout account",
+          "summary": "Remember user",
+          "notes": "Remember user",
+          "responseMessages": [
+            {
+              "code": 401,
+              "responseModel": null,
+              "message": "Unauthorized"
+            },
+            {
+              "code": 406,
+              "responseModel": null,
+              "message": "Not Acceptable"
+            }
+          ],
+          "nickname": "Api::V1::Users#remember_me",
+          "method": "post"
+        }
+      ]
+    },
+    {
+      "path": "/v1/forgot_password",
+      "operations": [
+        {
+          "parameters": [
+            {
+              "paramType": "form",
+              "name": "email",
+              "type": "string",
+              "description": "Email user",
+              "required": true
+            },
+            {
+              "paramType": "form",
+              "name": "password",
+              "type": "string",
+              "description": "Password",
+              "required": true
+            },
+            {
+              "paramType": "form",
+              "name": "password_confirmation",
+              "type": "string",
+              "description": "Password Confirmation",
+              "required": true
+            }
+          ],
+          "summary": "Forgot password",
+          "notes": "Forgot password",
           "responseMessages": [
             {
               "code": 401,
@@ -265,11 +343,62 @@
               "message": "Unprocessable Entity"
             }
           ],
-          "nickname": "Api::V1::Users#destroy",
-          "method": "get"
+          "nickname": "Api::V1::Users#forgot_password",
+          "method": "post"
+        }
+      ]
+    },
+    {
+      "path": "/v1/change_password",
+      "operations": [
+        {
+          "parameters": [
+            {
+              "paramType": "header",
+              "name": "Authorization",
+              "type": "string",
+              "description": "Authentication token",
+              "required": true
+            },
+            {
+              "paramType": "form",
+              "name": "password",
+              "type": "string",
+              "description": "Password",
+              "required": true
+            },
+            {
+              "paramType": "form",
+              "name": "password_confirmation",
+              "type": "string",
+              "description": "Password_confirmation",
+              "required": true
+            }
+          ],
+          "summary": "Change password user",
+          "notes": "Updating password User",
+          "responseMessages": [
+            {
+              "code": 401,
+              "responseModel": null,
+              "message": "Unauthorized"
+            },
+            {
+              "code": 406,
+              "responseModel": null,
+              "message": "Not Acceptable"
+            },
+            {
+              "code": 422,
+              "responseModel": null,
+              "message": "Unprocessable Entity"
+            }
+          ],
+          "nickname": "Api::V1::Users#change_password",
+          "method": "patch"
         }
       ]
     }
   ],
-    "authorizations": null
-  }
+  "authorizations": null
+}

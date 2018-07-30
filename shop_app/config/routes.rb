@@ -55,7 +55,11 @@ Rails.application.routes.draw do
     namespace :v1 do
       resources :users
       post '/login' => 'users#login'
-      post '/confirm' => 'users#confirm'
+      post '/logout' => 'users#logout'
+      get '/history' => 'users#history'
+      post '/remember_me' => 'users#remember_me'
+      post '/forgot_password/' => 'users#forgot_password'
+      patch'/change_password/' => 'users#change_password'
     end
   end
 end
