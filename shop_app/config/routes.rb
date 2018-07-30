@@ -63,6 +63,8 @@ Rails.application.routes.draw do
       resources :categories
       get '/categories_level_1' => 'categories#categories_level_1'
       post '/categories_level_2' => 'categories#categories_level_2'
+      resources :products
+      post '/list_products_by_category' => 'products#list_products_by_category'
     end
   end
 end
