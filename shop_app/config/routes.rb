@@ -60,6 +60,9 @@ Rails.application.routes.draw do
       post '/remember_me' => 'users#remember_me'
       post '/forgot_password/' => 'users#forgot_password'
       patch'/change_password/' => 'users#change_password'
+      resources :categories
+      get '/categories_level_1' => 'categories#categories_level_1'
+      post '/categories_level_2' => 'categories#categories_level_2'
     end
   end
 end
