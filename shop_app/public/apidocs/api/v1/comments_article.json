@@ -1,0 +1,149 @@
+{
+  "apiVersion": "1.0",
+  "swaggerVersion": "1.2",
+  "basePath": "http://127.0.0.1:3000",
+  "resourcePath": "comments_article",
+  "apis": [
+    {
+      "path": "/v1/articles/{article_id}/comments_article",
+      "operations": [
+      {
+        "parameters": [
+        {
+          "paramType": "header",
+          "name": "Authorization",
+          "type": "string",
+          "description": "Authentication token",
+          "required": true
+        },
+        {
+          "paramType": "path",
+          "name": "article_id",
+          "type": "integer",
+          "description": "Id article",
+          "required": true
+        }
+        ],
+        "summary": "List all comments by article",
+        "notes": "List all comments by article",
+        "responseMessages": [
+        {
+          "code": 401,
+          "responseModel": null,
+          "message": "Unauthorized"
+        }
+        ],
+        "nickname": "Api::V1::Comments_article#index",
+        "method": "get"
+      }
+      ]
+    },
+    {
+      "path": "/v1/articles/{article_id}/comments_article",
+      "operations": [
+        {
+          "parameters": [
+            {
+              "paramType": "header",
+              "name": "Authorization",
+              "type": "string",
+              "description": "Authentication token",
+              "required": true
+            },
+            {
+              "paramType": "path",
+              "name": "article_id",
+              "type": "integer",
+              "description": "Article Id",
+              "required": true
+            },
+            {
+              "paramType": "form",
+              "name": "parent_id",
+              "type": "integer",
+              "description": "Comment Id",
+              "required": true
+            },
+            {
+              "paramType": "form",
+              "name": "content",
+              "type": "string",
+              "description": "Comments content",
+              "required": true
+            }
+          ],
+          "summary": "Create a new comment",
+          "notes": "Create a new comment ",
+          "responseMessages": [
+            {
+              "code": 401,
+              "responseModel": null,
+              "message": "Unauthorized"
+            },
+            {
+              "code": 406,
+              "responseModel": null,
+              "message": "Not Acceptable"
+            },
+            {
+              "code": 422,
+              "responseModel": null,
+              "message": "Unprocessable Entity"
+            }
+          ],
+          "nickname": "Api::V1::Comments_article#create",
+          "method": "post"
+        }
+      ]
+    },
+     {
+      "path": "/v1/articles/{article_id}/comments_article/{id}",
+      "operations": [
+        {
+          "parameters": [
+            {
+              "paramType": "header",
+              "name": "Authorization",
+              "type": "string",
+              "description": "Authentication token",
+              "required": true
+            },
+            {
+              "paramType": "path",
+              "name": "article_id",
+              "type": "string",
+              "description": "Id Article",
+              "required": true
+            },
+            {
+              "paramType": "path",
+              "name": "id",
+              "type": "integer",
+              "description": "Id Comment",
+              "required": true
+            },
+            {
+              "paramType": "form",
+              "name": "parent_id",
+              "type": "integer",
+              "description": "Id Parent",
+              "required": true
+            }
+          ],
+          "summary": "Delete comments",
+          "notes": "Delete Comments",
+          "responseMessages": [
+            {
+              "code": 401,
+              "responseModel": null,
+              "message": "Unauthorized"
+            }
+          ],
+          "nickname": "Api::V1::Comments_article#destroy",
+          "method": "delete"
+        }
+      ]
+    }
+  ],
+  "authorizations": null
+}

@@ -60,12 +60,15 @@ Rails.application.routes.draw do
       post '/remember_me' => 'users#remember_me'
       post '/forgot_password/' => 'users#forgot_password'
       patch'/change_password/' => 'users#change_password'
+      get '/my_comments' => 'users#my_comments'
       resources :categories
       get '/categories_level_1' => 'categories#categories_level_1'
       post '/categories_level_2' => 'categories#categories_level_2'
       resources :products
       post '/list_products_by_category' => 'products#list_products_by_category'
-      resources :articles
+      resources :articles do 
+         resources :comments_article
+      end
     end
   end
 end

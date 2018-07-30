@@ -18,6 +18,10 @@
     {
       "path": "/apidocs/api/v1/articles.{format}",
       "description": "Articles Management"
+    },
+    {
+      "path": "/apidocs/api/v1/comments_article.{format}",
+      "description": "Comment article Management"
     }
   ],
   "authorizations": null

@@ -1,7 +1,8 @@
 module Api::V1
   
   class UsersController < ApiController
-    before_action :authorization, only: [:show, :update, :logout, :history_user, :remember_me]
+    before_action :authorization, only: [:show, :update, :logout, 
+                  :history_user, :remember_me, :my_comments   ]
     
     def index
         render json: User.all
@@ -77,6 +78,12 @@ module Api::V1
       else
        render json: { message: "Unauthorized!" }
       end
+    end
+
+    def my_comments
+      @my_comments = CommentProduct.where(user_id: payload[0]['user_id'])
+                                .order(product_id: :desc)
+      render json: @my_comments                         
     end
 
     def change_password

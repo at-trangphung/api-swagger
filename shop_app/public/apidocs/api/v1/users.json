@@ -398,6 +398,38 @@
           "method": "patch"
         }
       ]
+    },
+    {
+      "path": "/v1/my_comments",
+      "operations": [
+        {
+          "parameters": [
+            {
+              "paramType": "header",
+              "name": "Authorization",
+              "type": "string",
+              "description": "Authentication token",
+              "required": true
+            }
+          ],  
+          "summary": "List all comments of user ",
+          "notes": "This list all the comments of user",
+          "responseMessages": [
+            {
+              "code": 401,
+              "responseModel": null,
+              "message": "Unauthorized"
+            },
+            {
+              "code": 406,
+              "responseModel": null,
+              "message": "Not Acceptable"
+            }
+          ],
+          "nickname": "Api::V1::Users#my_comments",
+          "method": "get"
+        }
+      ]
     }
   ],
   "authorizations": null
