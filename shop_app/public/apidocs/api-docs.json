@@ -6,6 +6,10 @@
   	{
       "path": "/apidocs/api/v1/users.{format}",
       "description": "User Management"
+    },
+    {
+      "path": "/apidocs/api/v1/categories.{format}",
+      "description": "Categories Management"
     }
   ],
   "authorizations": null
