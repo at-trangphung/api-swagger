@@ -39,7 +39,7 @@
       ]
     },
     {
-      "path": "/v1/products/{product_id}/comments_product",
+      "path": "/v1/products/:product_id/create_comment_product",
       "operations": [
         {
           "parameters": [
@@ -52,7 +52,7 @@
             },
             {
               "paramType": "path",
-              "name": "product_id",
+              "name": "products[product_id]",
               "type": "integer",
               "description": "Product Id",
               "required": true
@@ -91,7 +91,7 @@
               "message": "Unprocessable Entity"
             }
           ],
-          "nickname": "Api::V1::comments_product#create",
+          "nickname": "Api::V1::comments_product#create_comment_product",
           "method": "post"
         }
       ]

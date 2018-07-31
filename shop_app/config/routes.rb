@@ -1,5 +1,6 @@
 Rails.application.routes.draw do
-  get '/docs' => redirect('/api_html/dist/index.html?url=/apidocs/api-docs.json')
+  # get '/docs' => redirect('/api_html/dist/index.html?url=/apidocs/api-docs.json')
+  get '/docs' => redirect('/swagger/dist/index.html?url=/apidocs/swagger.json')
   root 'shop#index'
   
   get '/search' => 'shop#search'
@@ -66,10 +67,12 @@ Rails.application.routes.draw do
       post '/categories_level_2' => 'categories#categories_level_2'
       resources :products do 
         resources :comments_product
+        post '/create_comment_product' => 'comments_product#create_comment_product'
       end  
       post '/list_products_by_category' => 'products#list_products_by_category'
       resources :articles do 
         resources :comments_article
+         post '/create_comment_article' => 'comments_article#create_comment_article'
       end
     end
   end

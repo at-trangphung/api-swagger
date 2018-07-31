@@ -1,14 +1,15 @@
 module Api::V1
   class CommentsArticleController < ApiController
+    before_action :authorization, only: [:create_comment_article, :destroy  ]
     
     def index
       @article  = Article.find_by(id: params[:article_id])
-      @comments = @article.comments.where(parent_id: 0, status: 1)
+      @comments = @article.comments.where(status: 1)
       render json: @comments
     end
 
-    def create
-      @article = Article.find_by(id: params[:article_id])
+    def create_comment_article
+      @article = Article.find_by(id: params[:articles][:article_id])
       @comment = @article.comments.create!(comment_params)
       render json: @comment
     end
@@ -16,17 +17,17 @@ module Api::V1
     def destroy
       @article   = Article.find_by(id: params[:article_id])
       @comments = []
-      @comments << @article.comments.find_by(id: params[:id])
-      @comments << @article.comments.find_by(parent_id: params[:parent_id])
+      @comments << @article.comments.find_by(id: params[:comment_id])
+      @comments << @article.comments.find_by(parent_id: params[:comment_id])
       @comments.each do |comment|
         if comment != nil
           comment.destroy
         end  
       end
       if @comments.compact!.nil?
-        render json: { message: 'failed!'}
-      else
         render json: { message: 'successfully!'}
+      else
+        render json: { message: 'failed!'}
       end
     end
     

@@ -10,13 +10,6 @@
       {
         "parameters": [
         {
-          "paramType": "header",
-          "name": "Authorization",
-          "type": "string",
-          "description": "Authentication token",
-          "required": true
-        },
-        {
           "paramType": "path",
           "name": "article_id",
           "type": "integer",
@@ -39,7 +32,7 @@
       ]
     },
     {
-      "path": "/v1/articles/{article_id}/comments_article",
+      "path": "/v1/articles/:article_id/create_comment_article",
       "operations": [
         {
           "parameters": [
@@ -52,7 +45,7 @@
             },
             {
               "paramType": "path",
-              "name": "article_id",
+              "name": "articles[article_id]",
               "type": "integer",
               "description": "Article Id",
               "required": true
@@ -91,7 +84,7 @@
               "message": "Unprocessable Entity"
             }
           ],
-          "nickname": "Api::V1::Comments_article#create",
+          "nickname": "Api::V1::Comments_article#create_comment_article",
           "method": "post"
         }
       ]

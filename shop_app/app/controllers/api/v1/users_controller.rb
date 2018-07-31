@@ -88,7 +88,6 @@ module Api::V1
 
     def change_password
       @current_user = User.find_by(id: payload[0]['user_id'])
-          binding.pry
       if params[:password]
         if @current_user.update(change_password_params)
           render json: {status: 'Change password successfully'}, status: :ok
