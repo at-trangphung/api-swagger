@@ -64,10 +64,12 @@ Rails.application.routes.draw do
       resources :categories
       get '/categories_level_1' => 'categories#categories_level_1'
       post '/categories_level_2' => 'categories#categories_level_2'
-      resources :products
+      resources :products do 
+        resources :comments_product
+      end  
       post '/list_products_by_category' => 'products#list_products_by_category'
       resources :articles do 
-         resources :comments_article
+        resources :comments_article
       end
     end
   end

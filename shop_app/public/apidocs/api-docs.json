@@ -22,6 +22,10 @@
     {
       "path": "/apidocs/api/v1/comments_article.{format}",
       "description": "Comment article Management"
+    },
+    {
+      "path": "/apidocs/api/v1/comments_product.{format}",
+      "description": "Comment product Management"
     }
   ],
   "authorizations": null

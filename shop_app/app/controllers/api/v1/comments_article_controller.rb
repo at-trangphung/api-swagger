@@ -1,5 +1,6 @@
 module Api::V1
   class CommentsArticleController < ApiController
+    
     def index
       @article  = Article.find_by(id: params[:article_id])
       @comments = @article.comments.where(parent_id: 0, status: 1)
@@ -22,12 +23,16 @@ module Api::V1
           comment.destroy
         end  
       end
-      render json: {status: 'Delete comment successfully!'}, status: :ok  
+      if @comments.compact!.nil?
+        render json: { message: 'failed!'}
+      else
+        render json: { message: 'successfully!'}
+      end
     end
     
     private
-    def comment_params
-      params.permit(:content, :parent_id).merge(user_id: payload[0]['user_id'])
-    end
+      def comment_params
+        params.permit(:content, :parent_id).merge(user_id: payload[0]['user_id'])
+      end
   end  
 end
