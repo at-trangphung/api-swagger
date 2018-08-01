@@ -234,6 +234,43 @@
       ]
     },
     {
+      "path": "/v1/logout",
+      "operations": [
+        { 
+          "parameters": [
+            {
+              "paramType": "header",
+              "name": "Authorization",
+              "type": "string",
+              "description": "Authentication token",
+              "required": true
+            }
+          ],
+          "summary": "Logout",
+          "notes": "Logout user",
+          "responseMessages": [
+            {
+              "code": 401,
+              "responseModel": null,
+              "message": "Unauthorized"
+            },
+            {
+              "code": 406,
+              "responseModel": null,
+              "message": "The request you made is not acceptable"
+            },
+            {
+              "code": 500,
+              "responseModel": null,
+              "message": "Requested Range Not Satisfiable"
+            }
+          ],
+          "nickname": "Api::V1::Users#logout",
+          "method": "post"
+        }
+      ]
+    },
+    {
       "path": "/v1/history",
       "operations": [
         {

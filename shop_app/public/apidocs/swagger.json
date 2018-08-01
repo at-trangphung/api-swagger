@@ -1,0 +1,845 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "description": "This is a swagger for shop coffee.",
+    "version": "1.0.0",
+    "title": "Swagger",
+  },
+  "host": "127.0.0.1:3000",
+  "basePath": "/v1",
+  "schemes": [
+    "http",
+    "https"
+  ],
+  "securityDefinitions":{
+    "Bearer": {
+      "type": "apiKey",
+      "name": "Authorization",
+      "in": "header"
+    }
+  },
+  "paths": {
+    "/login": {
+      "post": {
+        "tags": [
+          "Users"
+        ],
+        "summary": "Log in",
+        "description": "",
+        "operationId": "loginUser",
+        "consumes": [
+          "application/x-www-form-urlencoded"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "email",
+            "type": "string",
+            "description": "Email",
+            "in": "formData",
+            "required": true
+          },
+          {
+            "name": "password",
+            "type": "string",
+            "description": "Password",
+            "in": "formData",
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "schema": {
+              "type": "string"
+            },
+            "headers": {
+              "X-Rate-Limit": {
+                "type": "integer",
+                "format": "int32",
+                "description": "calls per hour allowed by the user"
+              },
+              "X-Expires-After": {
+                "type": "string",
+                "format": "date-time",
+                "description": "date in UTC when token expires"
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid username / password"
+          }
+        }
+      }
+    },
+    "/logout": {
+      "post": {
+        "tags": [
+          "Users"
+        ],
+        "summary": "Logout ",
+        "description": "Logout",
+        "operationId": "logoutUser",
+        "produces": [
+          "application/json"
+        ],
+        "security": [
+          {
+            "Bearer": []
+          }
+        ],
+        "parameters": [
+        
+        ],
+        "responses": {
+          "default": {
+            "description": "successful operation"
+          }
+        }
+      }
+    },
+    "/users": {
+      "post": {
+        "tags": [
+          "Users"
+        ],
+        "summary": "Sign up",
+        "description": "",
+        "operationId": "createUser",
+        "consumes": [
+          "application/x-www-form-urlencoded"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "first_name",
+            "type": "string",
+            "description": "First name",
+            "in": "formData",
+            "required": true
+          },
+          {
+            "name": "last_name",
+            "type": "string",
+            "description": "Last name",
+            "in": "formData",
+            "required": true
+          },
+          {
+            "name": "email",
+            "type": "string",
+            "description": "Email",
+            "in": "formData",
+            "required": true
+          },
+          {
+            "name": "password",
+            "type": "string",
+            "description": "Password",
+            "in": "formData",
+            "required": true
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": "successful operation"
+          }
+        }
+      }
+    },
+    "/users/id": {
+      "patch": {
+        "tags": [
+          "Users"
+        ],
+        "summary": "Updated user",
+        "description": "Update user",
+        "operationId": "updateUser",
+        "consumes": [
+          "application/x-www-form-urlencoded"
+        ], 
+        "produces": [
+          "application/json"
+        ],
+        "security": [
+          {
+            "Bearer": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "first_name",
+            "type": "string",
+            "description": "First name",
+            "in": "formData",
+            "required": false
+          },
+          {
+            "name": "last_name",
+            "type": "string",
+            "description": "Last name",
+            "in": "formData",
+            "required": false
+          },
+          {
+            "name": "company",
+            "type": "string",
+            "description": "Company",
+            "in": "formData",
+            "required": false
+          },
+          {
+            "name": "phone",
+            "type": "string",
+            "description": "Phone",
+            "in": "formData",
+            "required": false
+          },
+          {
+            "name": "address_deliver",
+            "type": "string",
+            "description": "Address_deliver",
+            "in": "formData",
+            "required": false
+          },
+          {
+            "name": "address",
+            "type": "string",
+            "description": "Address",
+            "in": "formData",
+            "required": false
+          },
+        ],
+        "responses": {
+          "400": {
+            "description": "Invalid user supplied"
+          },
+          "404": {
+            "description": "not found"
+          }
+        }
+      }
+    },
+    "/history": {
+      "get": {
+        "tags": [
+          "Users"
+        ],
+        "summary": "history orders of user",
+        "description": "",
+        "operationId": "historyUser",
+        "consumes": [
+          "application/x-www-form-urlencoded"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "security": [
+          {
+            "Bearer": []
+          }
+        ],
+        "parameters": [
+          
+        ],
+        "responses": {
+          "default": {
+            "description": "successful operation"
+          }
+        }
+      }
+    },
+    "/remember_me": {
+      "post": {
+        "tags": [
+          "Users"
+        ],
+        "summary": "remember account",
+        "description": "",
+        "operationId": "rememberMeUser",
+        "consumes": [
+          "application/x-www-form-urlencoded"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "security": [
+          {
+            "Bearer": []
+          }
+        ],
+        "parameters": [
+          
+        ],
+        "responses": {
+          "default": {
+            "description": "successful operation"
+          }
+        }
+      }
+    },
+    "/forgot_password": {
+      "post": {
+        "tags": [
+          "Users"
+        ],
+        "summary": "forgot_password user",
+        "description": "forgot_password user",
+        "operationId": "fogotPasswordUser",
+        "consumes": [
+          "application/x-www-form-urlencoded"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "email",
+            "type": "string",
+            "description": "email",
+            "in": "formData",
+            "required": true
+          },
+          {
+            "name": "password",
+            "type": "string",
+            "description": "Password",
+            "in": "formData",
+            "required": true
+          },
+          {
+            "name": "password_confirm",
+            "type": "string",
+            "description": "Password_confirm",
+            "in": "formData",
+            "required": true
+          },
+        ],
+        "responses": {
+          "400": {
+            "description": "Invalid user supplied"
+          },
+          "404": {
+            "description": "not found"
+          }
+        }
+      }
+    },
+    "/change_password": {
+      "patch": {
+        "tags": [
+          "Users"
+        ],
+        "summary": "Change password user",
+        "description": "Change password user",
+        "operationId": "changePasswordUser",
+        "consumes": [
+          "application/x-www-form-urlencoded"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "security": [
+          {
+            "Bearer": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "password",
+            "type": "string",
+            "description": "Password",
+            "in": "formData",
+            "required": true
+          },
+          {
+            "name": "password_confirm",
+            "type": "string",
+            "description": "Password_confirm",
+            "in": "formData",
+            "required": true
+          },
+        ],
+        "responses": {
+          "400": {
+            "description": "Invalid user supplied"
+          },
+          "404": {
+            "description": "not found"
+          }
+        }
+      }
+    },
+    "/my_comments": {
+      "get": {
+        "tags": [
+          "Users"
+        ],
+        "summary": "Comment product user ",
+        "description": "Comment",
+        "operationId": "myCommentsUser",
+        "produces": [
+          "application/json"
+        ],
+        "security": [
+          {
+            "Bearer": []
+          }
+        ],
+        "parameters": [
+        
+        ],
+        "responses": {
+          "default": {
+            "description": "successful operation"
+          }
+        }
+      }
+    },
+    "/categories": {
+      "get": {
+        "tags": [
+          "Categories"
+        ],
+        "summary": "List all categories",
+        "description": "",
+        "operationId": "categories",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+        ],
+        "responses": {
+          "default": {
+            "description": "successful operation"
+          }
+        }
+      }
+    },
+    "/categories_level_1": {
+      "get": {
+        "tags": [
+          "Categories"
+        ],
+        "summary": "List categories level 1",
+        "description": "",
+        "operationId": "categoriesLevel1",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+         
+        ],
+        "responses": {
+          "default": {
+            "description": "successful operation"
+          }
+        }
+      }
+    },
+    "/categories_level_2": {
+      "post": {
+        "tags": [
+          "Categories"
+        ],
+        "summary": "List categories level 2",
+        "description": "",
+        "operationId": "categoriesLevel2",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+         
+        ],
+        "responses": {
+          "default": {
+            "description": "successful operation"
+          }
+        }
+      }
+    },
+    "/products": {
+      "get": {
+        "tags": [
+          "Products"
+        ],
+        "summary": "List all products",
+        "description": "",
+        "operationId": "products",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+        ],
+        "responses": {
+          "default": {
+            "description": "successful operation"
+          }
+        }
+      }
+    },
+    "/products/{id}": {
+      "get": {
+        "tags": [
+          "Products"
+        ],
+        "summary": "Detail product",
+        "description": "",
+        "operationId": "showProduces",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+           "name": "id",
+            "in": "path",
+            "description": "id product",
+            "required": true,
+            "type": "integer"
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": "successful operation"
+          }
+        }
+      }
+    },
+    "/list_products_by_category": {
+      "post": {
+        "tags": [
+          "Products"
+        ],
+        "summary": "List product by category",
+        "description": "List product by category",
+        "operationId": "ListProductByCategoryProduct",
+        "consumes": [
+          "application/x-www-form-urlencoded"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+           "name": "id",
+            "in": "formData",
+            "description": "id category",
+            "required": true,
+            "type": "integer"
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": "successful operation"
+          }
+        }
+      }
+    },
+    "/articles": {
+      "get": {
+        "tags": [
+          "Articles"
+        ],
+        "summary": "Lists all articles",
+        "description": "",
+        "operationId": "articles",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+        ],
+        "responses": {
+          "default": {
+            "description": "successful operation"
+          }
+        }
+      }
+    },
+    "/articles/{id}": {
+      "get": {
+        "tags": [
+          "Articles"
+        ],
+        "summary": "show article",
+        "description": "",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "id article ",
+            "required": true,
+            "type": "integer"
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": "successful operation"
+          }
+        }
+      }
+    },
+    "/articles/{article_id}/comments_article": {
+      "get": {
+        "tags": [
+          "Comments Article"
+        ],
+        "summary": "List all comments by article",
+        "description": "",
+        "operationId": "comments",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+            {
+              "in": "path",
+              "name": "article_id",
+              "type": "integer",
+              "description": "Article Id",
+              "required": true
+            }
+          ],
+        "responses": {
+          "default": {
+            "description": "successful operation"
+          }
+        }
+      }
+    },
+    "/articles/:article_id/create_comment_article": {
+      "post": {
+        "tags": [
+          "Comments Article"
+        ],
+        "summary": "Create a new comment",
+        "description": "",
+        "operationId": "createComment",
+        "consumes": [
+          "application/x-www-form-urlencoded"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "security": [
+          {
+            "Bearer": []
+          }
+        ],
+        "parameters": [
+            {
+              "in": "formData",
+              "name": "articles[article_id]",
+              "type": "integer",
+              "description": "Article Id",
+              "required": true
+            },
+            {
+              "in": "formData",
+              "name": "parent_id",
+              "type": "integer",
+              "description": "Parent Id",
+              "required": true
+            },
+            {
+              "in": "formData",
+              "name": "content",
+              "type": "string",
+              "description": "Content ",
+              "required": true
+            },
+          ],
+        "responses": {
+          "default": {
+            "description": "successful operation"
+          }
+        }
+      }
+    },
+    "/articles/{article_id}/comments_article/:id": {
+      "delete": {
+        "tags": [
+          "Comments Article"
+        ],
+        "summary": "Delete comments",
+        "description": "",
+        "operationId": "deleteComment",
+        "consumes": [
+          "application/x-www-form-urlencoded"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "security": [
+          {
+            "Bearer": []
+          }
+        ],
+        "parameters": [
+            {
+              "in": "path",
+              "name": "article_id",
+              "type": "integer",
+              "description": "Article Id",
+              "required": true
+            },
+            {
+              "in": "formData",
+              "name": "comment_id",
+              "type": "integer",
+              "description": "Id comment",
+              "required": true
+            },
+            {
+              "in": "formData",
+              "name": "parent_id",
+              "type": "integer",
+              "description": "Parent id",
+              "required": true
+            }
+          ],
+        "responses": {
+          "default": {
+            "description": "successful operation"
+          }
+        }
+      }
+    },
+    "/products/{product_id}/comments_product": {
+      "get": {
+        "tags": [
+          "Comments Product"
+        ],
+        "summary": "List all comments by products",
+        "description": "",
+        "consumes": [
+          "application/x-www-form-urlencoded"
+        ],
+      
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+            {
+              "in": "path",
+              "name": "product_id",
+              "type": "integer",
+              "description": "Product Id",
+              "required": true
+            }
+          ],
+        "responses": {
+          "default": {
+            "description": "successful operation"
+          }
+        }
+      }
+    },
+    "/products/:product_id/create_comment_product": {
+      "post": {
+        "tags": [
+          "Comments Product"
+        ],
+        "summary": "Create a new comment",
+        "description": "",
+        "consumes": [
+          "application/x-www-form-urlencoded"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "security": [
+          {
+            "Bearer": []
+          }
+        ],
+        "parameters": [
+            {
+              "in": "formData",
+              "name": "product[product_id]",
+              "type": "integer",
+              "description": "Product Id",
+              "required": true
+            },
+            {
+              "in": "formData",
+              "name": "parent_id",
+              "type": "integer",
+              "description": "Parent Id",
+              "required": true
+            },
+            {
+              "in": "formData",
+              "name": "content",
+              "type": "string",
+              "description": "Content",
+              "required": true
+            },
+          ],
+        "responses": {
+          "default": {
+            "description": "successful operation"
+          }
+        }
+      }
+    },
+    "/products/{product_id}/comments_product/:id": {
+      "delete": {
+        "tags": [
+          "Comments Product"
+        ],
+        "summary": "Delete comments",
+        "description": "",
+        "consumes": [
+          "application/x-www-form-urlencoded"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "security": [
+          {
+            "Bearer": []
+          }
+        ],
+        "parameters": [
+            {
+              "in": "path",
+              "name": "product_id",
+              "type": "integer",
+              "description": "Product Id",
+              "required": true
+            },
+            {
+              "in": "formData",
+              "name": "comment_id",
+              "type": "integer",
+              "description": "Id comment",
+              "required": true
+            },
+            {
+              "in": "formData",
+              "name": "parent_id",
+              "type": "integer",
+              "description": "Parent id",
+              "required": true
+            }
+          ],
+        "responses": {
+          "default": {
+            "description": "successful operation"
+          }
+        }
+      }
+    },
+  },
+
+  "externalDocs": {
+    "description": "Find out more about Swagger",
+    "url": "https://swagger.io"
+  }
+}
