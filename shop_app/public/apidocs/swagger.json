@@ -994,6 +994,74 @@
         }
       }
     },
+    "/favorites": {
+      "post": {
+        "tags": [
+          "Favorites"
+        ],
+        "summary": "Create a new like",
+        "description": "",
+        "consumes": [
+          "application/x-www-form-urlencoded"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "security": [
+          {
+            "Bearer": []
+          }
+        ],
+        "parameters": [
+            {
+              "in": "formData",
+              "name": "product_id",
+              "type": "integer",
+              "description": "Product Id",
+              "required": true
+            },
+          ],
+        "responses": {
+          "default": {
+            "description": "successful operation"
+          }
+        }
+      }
+    },
+    "/favorites/:id": {
+      "delete": {
+        "tags": [
+          "Favorites"
+        ],
+        "summary": "Delete like",
+        "description": "",
+        "consumes": [
+          "application/x-www-form-urlencoded"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "security": [
+          {
+            "Bearer": []
+          }
+        ],
+        "parameters": [
+            {
+              "in": "formData",
+              "name": "product_id",
+              "type": "integer",
+              "description": "Product Id",
+              "required": true
+            }
+          ],
+        "responses": {
+          "default": {
+            "description": "successful operation"
+          }
+        }
+      }
+    },
   },
 
   "externalDocs": {
