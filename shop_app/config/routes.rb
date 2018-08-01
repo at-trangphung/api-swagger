@@ -74,6 +74,7 @@ Rails.application.routes.draw do
         resources :comments_article
          post '/create_comment_article' => 'comments_article#create_comment_article'
       end
+      resources :checkouts
     end
   end
 end

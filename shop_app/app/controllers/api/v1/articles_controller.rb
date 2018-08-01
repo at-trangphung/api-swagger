@@ -7,7 +7,6 @@ module Api::V1
     end
 
     def show
-      binding.pry
       @article = Article.find_by(id: params[:id])
       if @article.present?
         render json: @article
