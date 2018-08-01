@@ -836,6 +836,164 @@
         }
       }
     },
+    "/checkouts/{id}": {
+      "get": {
+        "tags": [
+          "Transactions"
+        ],
+        "summary": "Find transaction by id",
+        "description": "",
+        "operationId": "showTransaction",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "Transaction id ",
+            "required": true,
+            "type": "integer"
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": "successful operation"
+          }
+        }
+      }
+    },
+    "/checkouts": {
+      "post": {
+        "tags": [
+          "Transactions"
+        ],
+        "summary": "Create a new transaction ",
+        "description": "Create a new transaction",
+        "operationId": "createTransaction",
+        "consumes": [
+          "application/x-www-form-urlencoded"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+            {
+              "in": "formData",
+              "name": "customer[first_name]",
+              "type": "string",
+              "description": "First name",
+              "required": true
+            },
+            {
+              "in": "formData",
+              "name": "customer[last_name]",
+              "type": "string",
+              "description": "Last name",
+              "required": true
+            },
+            {
+              "in": "formData",
+              "name": "customer[email]",
+              "type": "string",
+              "description": "Email",
+              "required": true
+            },
+            {
+              "in": "formData",
+              "name": "customer[phone]",
+              "type": "integer",
+              "description": "Phone",
+              "required": true
+            },
+            {
+              "in": "formData",
+              "name": "customer[address]",
+              "type": "string",
+              "description": "Address",
+              "required": true
+            },
+            {
+              "in": "formData",
+              "name": "customer[address_deliver]",
+              "type": "string",
+              "description": "Address deliver",
+              "required": true
+            },
+            {
+              "in": "formData",
+              "name": "hours",
+              "type": "integer",
+              "description": "Hours to deliver",
+              "required": false
+            },
+            {
+              "in": "formData",
+              "name": "minutes",
+              "type": "integer",
+              "description": "Minutes deliver",
+              "required": false
+            },
+            {
+              "in": "formData",
+              "name": "comment",
+              "type": "string",
+              "description": "Comment",
+              "required": false
+            },
+            {
+              "in": "formData",
+              "name": "order[amount]",
+              "type": "number",
+              "format": "integer",
+              "description": "Amount",
+              "required": true
+            },
+            {
+              "in": "formData",
+              "name": "order[product_id]",
+              "type": "integer",
+              "description": "Product id",
+              "required": true
+            },
+            {
+              "in": "formData",
+              "name": "order[quantity]",
+              "type": "integer",
+              "description": "Quantity",
+              "required": true
+            },
+            {
+              "in": "formData",
+              "name": "order[total_payment]",
+              "type": "integer",
+              "format": "float",
+              "description": "Total payment",
+              "required": true
+            },
+            {
+              "in": "formData",
+              "name": "order[price]",
+              "type": "integer",
+              "format": "float",
+              "description": "Price",
+              "required": true
+            },
+            {
+              "in": "formData",
+              "name": "order[size]",
+              "type": "string",
+              "description": "Size",
+              "required": true
+            }
+          ],
+        "responses": {
+          "default": {
+            "description": "successful operation"
+          }
+        }
+      }
+    },
   },
 
   "externalDocs": {
