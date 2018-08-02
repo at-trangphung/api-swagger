@@ -2,7 +2,7 @@ module Api::V1
   
   class UsersController < ApiController
     before_action :authorization, only: [:show, :update, :logout, 
-                  :history_user, :remember_me, :my_comments   ]
+                  :history_user, :remember_me, :my_comments, :upload_file ]
     
     def index
         render json: User.all
@@ -74,23 +74,36 @@ module Api::V1
       if @current_user.present?
       id = Customer.find_by(user_id: @current_user.id)
       @orders = Transaction.where(customer_id: id)
-        render json: @orders
+        if @orders.present?
+          render json: @orders
+        else
+          render  json: { message: 'Not found'}
+        end  
       else
-       render json: { message: "Unauthorized!" }
+        render json: { message: "Unauthorized!" }
       end
     end
 
     def my_comments
+      @current_user = User.find_by(id: payload[0]['user_id'])
+      if @current_user.present?
       @my_comments = CommentProduct.where(user_id: payload[0]['user_id'])
                                 .order(product_id: :desc)
-      render json: @my_comments                         
+        if @my_comments.present?
+          render json: @my_comments
+        else
+          render  json: { message: 'Not found'}
+        end 
+      else
+        render json: { message: "Unauthorized!" }
+      end                          
     end
 
     def change_password
       @current_user = User.find_by(id: payload[0]['user_id'])
       if params[:password]
-        if @current_user.update(change_password_params)
-          render json: {status: 'Change password successfully'}, status: :ok
+        if @current_user.update!(change_password_params)
+          render json: @current_user
         else
           render json: {error: 'change password failed'}
         end
@@ -102,11 +115,26 @@ module Api::V1
       if @current_user.present?
         auth_token = JsonWebToken.encode({user_id: @current_user.id})
         @current_user.update_attribute(:remember_digest, auth_token)
-        render json: @current_user
+        render json: {message: 'successfully!'}
       else
         render json: { message: "Unauthorized!" }
       end
     end
+
+    def upload_file
+      @current_user = User.find_by(id: payload[0]['user_id'])
+      @uploads = {}
+      @uploads[:image] = Cloudinary::Uploader.upload(
+        permit_params[:avatar], 
+        public_id: permit_params[:avatar].original_filename.split('.')[0])
+      name_file = permit_params[:avatar].original_filename.split('.')[0]
+      if @current_user.update_columns(avatar: name_file)
+        render json: { message: 'successfully' }
+      else
+        render json: { message: 'failed'}
+      end
+    end
+
     private
       def user_params
         params.permit(:first_name, :last_name, :email, :password)
@@ -119,6 +147,10 @@ module Api::V1
 
       def change_password_params
         params.permit(:password, :password_confirmation )
+      end
+
+      def permit_params
+        params.permit(:avatar)
       end
   end
 end

@@ -5,7 +5,11 @@ module Api::V1
     def index
       @article  = Article.find_by(id: params[:article_id])
       @comments = @article.comments.where(status: 1)
-      render json: @comments
+      if @comments.present?
+        render json: @comments
+      else
+        render json: {message: 'Not found'}
+      end    
     end
 
     def create_comment_article
@@ -22,10 +26,16 @@ module Api::V1
       @comments.each do |comment|
         if comment != nil
           comment.destroy
+
         end  
       end
-      if @comments.compact!.nil?
-        render json: { message: 'successfully!'}
+      comments = []
+      binding.pry
+      comments << @article.comments.find_by(id: params[:comment_id])
+      comments << @article.comments.find_by(parent_id: params[:comment_id])
+      comments.compact!
+      if comments.empty?
+        render json: { message: 'sucessfully!'}
       else
         render json: { message: 'failed!'}
       end
