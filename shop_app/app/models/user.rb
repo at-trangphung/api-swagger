@@ -1,7 +1,6 @@
 class User < ApplicationRecord
   has_secure_password validations: false
-  attr_accessor :activation_token, :reset_token
-
+  attr_accessor :activation_token, :reset_toke, :avatar
   mount_uploader :avatar
   before_save   :downcase_email
   before_create :create_activation_digest

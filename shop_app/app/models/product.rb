@@ -9,4 +9,6 @@ class Product < ApplicationRecord
   has_many :orders
   has_many :transactions, through: :orders
   enum status: {not_exist: 0, exist: 1}
+  scope :search, ->(key){where("name like ? and status like ?", "%#{key}%", "exist")}
+  
 end

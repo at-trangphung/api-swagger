@@ -151,6 +151,41 @@
         }
       }
     },
+     "/upload_file": {
+      "post": {
+        "tags": [
+          "Users"
+        ],
+        "summary": "Upload file",
+        "description": "",
+        "operationId": "uploadFileUser",
+        "consumes": [
+          "multipart/form-data"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "security": [
+          {
+            "Bearer": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "avatar",
+            "type": "file",
+            "description": "The file to upload",
+            "in": "formData",
+            "required": true
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": "successful operation"
+          }
+        }
+      }
+    },
     "/users/id": {
       "patch": {
         "tags": [
@@ -453,7 +488,13 @@
           "application/json"
         ],
         "parameters": [
-         
+          {
+            "name": "parent_id",
+            "type": "integer",
+            "description": "id category parent",
+            "in": "formData",
+            "required": true
+          }
         ],
         "responses": {
           "default": {
@@ -474,6 +515,13 @@
           "application/json"
         ],
         "parameters": [
+          {
+            "name": "key search",
+            "in": "query",
+            "description": "key search",
+            "required": false,
+            "type": "string"
+          }
         ],
         "responses": {
           "default": {
@@ -509,8 +557,8 @@
         }
       }
     },
-    "/list_products_by_category": {
-      "post": {
+    "/list_products_by_category/{id_category}/products": {
+      "get": {
         "tags": [
           "Products"
         ],
@@ -525,8 +573,8 @@
         ],
         "parameters": [
           {
-           "name": "id",
-            "in": "formData",
+           "name": "id_category",
+            "in": "path",
             "description": "id category",
             "required": true,
             "type": "integer"
@@ -694,13 +742,6 @@
               "type": "integer",
               "description": "Id comment",
               "required": true
-            },
-            {
-              "in": "formData",
-              "name": "parent_id",
-              "type": "integer",
-              "description": "Parent id",
-              "required": true
             }
           ],
         "responses": {
@@ -819,13 +860,6 @@
               "name": "comment_id",
               "type": "integer",
               "description": "Id comment",
-              "required": true
-            },
-            {
-              "in": "formData",
-              "name": "parent_id",
-              "type": "integer",
-              "description": "Parent id",
               "required": true
             }
           ],
@@ -984,6 +1018,74 @@
               "name": "order[size]",
               "type": "string",
               "description": "Size",
+              "required": true
+            }
+          ],
+        "responses": {
+          "default": {
+            "description": "successful operation"
+          }
+        }
+      }
+    },
+    "/favorites": {
+      "post": {
+        "tags": [
+          "Favorites"
+        ],
+        "summary": "Create a new like",
+        "description": "",
+        "consumes": [
+          "application/x-www-form-urlencoded"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "security": [
+          {
+            "Bearer": []
+          }
+        ],
+        "parameters": [
+            {
+              "in": "formData",
+              "name": "product_id",
+              "type": "integer",
+              "description": "Product Id",
+              "required": true
+            },
+          ],
+        "responses": {
+          "default": {
+            "description": "successful operation"
+          }
+        }
+      }
+    },
+    "/favorites/:id": {
+      "delete": {
+        "tags": [
+          "Favorites"
+        ],
+        "summary": "Delete like",
+        "description": "",
+        "consumes": [
+          "application/x-www-form-urlencoded"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "security": [
+          {
+            "Bearer": []
+          }
+        ],
+        "parameters": [
+            {
+              "in": "formData",
+              "name": "product_id",
+              "type": "integer",
+              "description": "Product Id",
               "required": true
             }
           ],

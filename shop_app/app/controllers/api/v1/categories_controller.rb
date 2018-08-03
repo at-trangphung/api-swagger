@@ -15,7 +15,7 @@ module Api::V1
     end
 
     def categories_level_2
-      @categories_level_2 = Category.find_by(parent_id: params[:parent_id])
+      @categories_level_2 = Category.where(parent_id: params[:parent_id])
       if @categories_level_2.present?
         render json: @categories_level_2
       else

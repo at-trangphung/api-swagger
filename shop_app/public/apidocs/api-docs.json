@@ -3,30 +3,7 @@
   "swaggerVersion": "1.2",
   "basePath": "http://127.0.0.1:3000",
   "apis": [
-  	{
-      "path": "/apidocs/api/v1/users.{format}",
-      "description": "User Management"
-    },
-    {
-      "path": "/apidocs/api/v1/categories.{format}",
-      "description": "Categories Management"
-    },
-    {
-      "path": "/apidocs/api/v1/products.{format}",
-      "description": "Products Management"
-    },
-    {
-      "path": "/apidocs/api/v1/articles.{format}",
-      "description": "Articles Management"
-    },
-    {
-      "path": "/apidocs/api/v1/comments_article.{format}",
-      "description": "Comment article Management"
-    },
-    {
-      "path": "/apidocs/api/v1/comments_product.{format}",
-      "description": "Comment product Management"
-    }
+
   ],
   "authorizations": null
 }

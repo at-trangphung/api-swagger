@@ -62,6 +62,7 @@ Rails.application.routes.draw do
       post '/forgot_password/' => 'users#forgot_password'
       patch'/change_password/' => 'users#change_password'
       get '/my_comments' => 'users#my_comments'
+      post '/upload_file' => 'users#upload_file'
       resources :categories
       get '/categories_level_1' => 'categories#categories_level_1'
       post '/categories_level_2' => 'categories#categories_level_2'
@@ -69,12 +70,13 @@ Rails.application.routes.draw do
         resources :comments_product
         post '/create_comment_product' => 'comments_product#create_comment_product'
       end  
-      post '/list_products_by_category' => 'products#list_products_by_category'
+      get '/list_products_by_category/:id_category/products' => 'products#list_products_by_category'
       resources :articles do 
         resources :comments_article
          post '/create_comment_article' => 'comments_article#create_comment_article'
       end
       resources :checkouts
+      resources :favorites
     end
   end
 end

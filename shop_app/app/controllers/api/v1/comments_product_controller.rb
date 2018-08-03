@@ -23,7 +23,11 @@ module Api::V1
           comment.destroy
         end  
       end
-      if @comments.compact!.nil?
+      comments = []
+      comments << @product.comment_products.find_by(id: params[:comment_id])
+      comments << @product.comment_products.find_by(parent_id: params[:comment_id])
+      comments.compact!
+      if comments.empty?
         render json: { message: 'successfully!'}
       else
         render json: { message: 'failed!'}
